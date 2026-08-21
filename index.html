@@ -51,11 +51,15 @@ body{font-family:-apple-system,"Segoe UI",system-ui,sans-serif;background:#f0f2f
 /* GRID */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;align-items:stretch}
 @media(max-width:800px){.grid2{grid-template-columns:1fr}}
+/* Cards inside grid2 must fill full height */
+.grid2>.card{margin-bottom:0;height:100%}
 .card{background:#fff;border-radius:8px;border:1px solid #e5e7eb;overflow:hidden;margin-bottom:14px;display:flex;flex-direction:column}
 .card:last-child{margin-bottom:0}
 .ch{padding:10px 14px;border-bottom:1px solid #f0f2f5;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
 .ch h3{font-size:12px;font-weight:700;color:#1d3557}
-.cb{padding:12px 14px;flex:1;overflow:auto}
+.cb{padding:12px 14px;flex:1;min-height:0}
+/* Campaign name truncation — prevents row wrapping that breaks equal-height layout */
+.campaign-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;display:block}
 
 /* TABLE */
 table{width:100%;border-collapse:collapse;font-size:11px}
@@ -262,19 +266,19 @@ tr:hover td{background:#f7f8fa}
     <div class="cb">
       <table>
         <tr><th>#</th><th>Campaign</th><th>Leads</th><th>Investment (Rp Juta)</th><th>Deal/Win (Rp Miliar)</th><th>ROI</th></tr>
-        <tr><td style="color:#3b82d4;font-weight:700">1</td><td style="font-size:10px">CX Day 2024 - Yogyakarta (Sep)</td><td>447</td><td>299,28</td><td style="font-weight:800;color:#16a34a">6,67</td><td>22.3x</td></tr>
-        <tr><td style="color:#3b82d4;font-weight:700">2</td><td style="font-size:10px">Tech Day 2025 - Medan (Mei)</td><td>411</td><td>252,14</td><td style="font-weight:800;color:#16a34a">6,18</td><td>24.5x</td></tr>
-        <tr><td style="color:#3b82d4;font-weight:700">3</td><td style="font-size:10px">Innovation Summit 2024 - Yogyakarta</td><td>228</td><td>300,37</td><td style="font-weight:800;color:#3b82d4">5,27</td><td>17.5x</td></tr>
-        <tr><td style="color:#3b82d4;font-weight:700">4</td><td style="font-size:10px">AI Roadshow 2025 - Jakarta (Agt)</td><td>424</td><td>204,18</td><td style="font-weight:800;color:#3b82d4">5,22</td><td>25.6x</td></tr>
-        <tr><td style="color:#3b82d4;font-weight:700">5</td><td style="font-size:10px">AI Roadshow 2024 - Makassar (Sep)</td><td>372</td><td>247,19</td><td style="font-weight:800;color:#3b82d4">4,91</td><td>19.9x</td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">1</td><td><span class="campaign-name">CX Day 2024 - Yogyakarta (Sep)</span></td><td>447</td><td>299,28</td><td style="font-weight:800;color:#16a34a">6,67</td><td>22.3x</td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">2</td><td><span class="campaign-name">Tech Day 2025 - Medan (Mei)</span></td><td>411</td><td>252,14</td><td style="font-weight:800;color:#16a34a">6,18</td><td>24.5x</td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">3</td><td><span class="campaign-name">Innovation Summit 2024 - Yogyakarta</span></td><td>228</td><td>300,37</td><td style="font-weight:800;color:#3b82d4">5,27</td><td>17.5x</td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">4</td><td><span class="campaign-name">AI Roadshow 2025 - Jakarta (Agt)</span></td><td>424</td><td>204,18</td><td style="font-weight:800;color:#3b82d4">5,22</td><td>25.6x</td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">5</td><td><span class="campaign-name">AI Roadshow 2024 - Makassar (Sep)</span></td><td>372</td><td>247,19</td><td style="font-weight:800;color:#3b82d4">4,91</td><td>19.9x</td></tr>
       </table>
       <hr style="border:none;border-top:1px solid #f0f2f5;margin:8px 0"/>
       <div style="font-size:10px;font-weight:700;margin-bottom:6px">🥇 Top 3 Email Campaign (ROI)</div>
       <table>
         <tr><th>Campaign</th><th>Leads</th><th>Investment (Rp Juta)</th><th>CPL (Rp)</th><th>ROI</th></tr>
-        <tr><td style="font-size:10px">Email - Event Invitation (Jan'24)</td><td>2,972</td><td>9,44</td><td>3,176</td><td style="color:#16a34a;font-weight:800">156x</td></tr>
-        <tr><td style="font-size:10px">Email - Newsletter Bulanan (Jun'24)</td><td>2,586</td><td>11,70</td><td>4,526</td><td style="color:#16a34a;font-weight:800">150x</td></tr>
-        <tr><td style="font-size:10px">Email - Lead Nurturing (Jul'25)</td><td>2,660</td><td>12,02</td><td>4,520</td><td style="color:#16a34a;font-weight:800">134x</td></tr>
+        <tr><td><span class="campaign-name">Email - Event Invitation (Jan'24)</span></td><td>2,972</td><td>9,44</td><td>3,176</td><td style="color:#16a34a;font-weight:800">156x</td></tr>
+        <tr><td><span class="campaign-name">Email - Newsletter Bulanan (Jun'24)</span></td><td>2,586</td><td>11,70</td><td>4,526</td><td style="color:#16a34a;font-weight:800">150x</td></tr>
+        <tr><td><span class="campaign-name">Email - Lead Nurturing (Jul'25)</span></td><td>2,660</td><td>12,02</td><td>4,520</td><td style="color:#16a34a;font-weight:800">134x</td></tr>
       </table>
     </div>
   </div>
@@ -302,16 +306,16 @@ tr:hover td{background:#f7f8fa}
       <div class="cb scroll-x">
         <table>
           <tr><th>#</th><th>Campaign</th><th>Channel</th><th>Leads</th><th>Investment (Rp Juta)</th><th>CPL (Rp)</th><th>Deal/Win (Rp B)</th><th>ROI</th></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">1</td><td style="font-size:10px">Email - Event Invitation (Jan 2024)</td><td><span class="tag t-email">Email</span></td><td>2,972</td><td>9,44</td><td>3,176</td><td>1.47</td><td style="color:#16a34a;font-weight:800">156x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">2</td><td style="font-size:10px">Email - Newsletter Bulanan (Jun 2024)</td><td><span class="tag t-email">Email</span></td><td>2,586</td><td>11,70</td><td>4,526</td><td>1.76</td><td style="color:#16a34a;font-weight:800">150x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">3</td><td style="font-size:10px">Email - Lead Nurturing (Jul 2025)</td><td><span class="tag t-email">Email</span></td><td>2,660</td><td>12,02</td><td>4,520</td><td>1.62</td><td style="color:#16a34a;font-weight:800">134x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">4</td><td style="font-size:10px">Email - Case Study (Nov 2025)</td><td><span class="tag t-email">Email</span></td><td>2,212</td><td>9,16</td><td>4,143</td><td>1.23</td><td style="color:#16a34a;font-weight:800">134x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">5</td><td style="font-size:10px">Email - Case Study (Okt 2024)</td><td><span class="tag t-email">Email</span></td><td>2,983</td><td>8,79</td><td>2,945</td><td>1.09</td><td style="color:#3b82d4;font-weight:700">124x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">6</td><td style="font-size:10px">Email - Lead Nurturing (Mei 2024)</td><td><span class="tag t-email">Email</span></td><td>1,762</td><td>11,12</td><td>6,310</td><td>1.28</td><td style="color:#3b82d4;font-weight:700">115x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">7</td><td style="font-size:10px">Email - Product Update (Feb 2024)</td><td><span class="tag t-email">Email</span></td><td>2,544</td><td>11,64</td><td>4,575</td><td>1.33</td><td style="color:#3b82d4;font-weight:700">114x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">8</td><td style="font-size:10px">Email - Event Invitation (Apr 2025)</td><td><span class="tag t-email">Email</span></td><td>2,858</td><td>12,19</td><td>4,269</td><td>1.31</td><td style="color:#3b82d4;font-weight:700">107x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">9</td><td style="font-size:10px">Email - Newsletter (Apr 2025)</td><td><span class="tag t-email">Email</span></td><td>2,824</td><td>6,42</td><td>2,275</td><td>0.69</td><td style="color:#3b82d4;font-weight:700">107x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">10</td><td style="font-size:10px">Website - Free Trial (Sep 2025)</td><td><span class="tag t-web">Website</span></td><td>999</td><td>10,81</td><td>10,813</td><td>1.12</td><td style="color:#3b82d4;font-weight:700">103x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">1</td><td><span class="campaign-name">Email - Event Invitation (Jan 2024)</span></td><td><span class="tag t-email">Email</span></td><td>2,972</td><td>9,44</td><td>3,176</td><td>1.47</td><td style="color:#16a34a;font-weight:800">156x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">2</td><td><span class="campaign-name">Email - Newsletter Bulanan (Jun 2024)</span></td><td><span class="tag t-email">Email</span></td><td>2,586</td><td>11,70</td><td>4,526</td><td>1.76</td><td style="color:#16a34a;font-weight:800">150x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">3</td><td><span class="campaign-name">Email - Lead Nurturing (Jul 2025)</span></td><td><span class="tag t-email">Email</span></td><td>2,660</td><td>12,02</td><td>4,520</td><td>1.62</td><td style="color:#16a34a;font-weight:800">134x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">4</td><td><span class="campaign-name">Email - Case Study (Nov 2025)</span></td><td><span class="tag t-email">Email</span></td><td>2,212</td><td>9,16</td><td>4,143</td><td>1.23</td><td style="color:#16a34a;font-weight:800">134x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">5</td><td><span class="campaign-name">Email - Case Study (Okt 2024)</span></td><td><span class="tag t-email">Email</span></td><td>2,983</td><td>8,79</td><td>2,945</td><td>1.09</td><td style="color:#3b82d4;font-weight:700">124x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">6</td><td><span class="campaign-name">Email - Lead Nurturing (Mei 2024)</span></td><td><span class="tag t-email">Email</span></td><td>1,762</td><td>11,12</td><td>6,310</td><td>1.28</td><td style="color:#3b82d4;font-weight:700">115x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">7</td><td><span class="campaign-name">Email - Product Update (Feb 2024)</span></td><td><span class="tag t-email">Email</span></td><td>2,544</td><td>11,64</td><td>4,575</td><td>1.33</td><td style="color:#3b82d4;font-weight:700">114x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">8</td><td><span class="campaign-name">Email - Event Invitation (Apr 2025)</span></td><td><span class="tag t-email">Email</span></td><td>2,858</td><td>12,19</td><td>4,269</td><td>1.31</td><td style="color:#3b82d4;font-weight:700">107x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">9</td><td><span class="campaign-name">Email - Newsletter (Apr 2025)</span></td><td><span class="tag t-email">Email</span></td><td>2,824</td><td>6,42</td><td>2,275</td><td>0.69</td><td style="color:#3b82d4;font-weight:700">107x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">10</td><td><span class="campaign-name">Website - Free Trial (Sep 2025)</span></td><td><span class="tag t-web">Website</span></td><td>999</td><td>10,81</td><td>10,813</td><td>1.12</td><td style="color:#3b82d4;font-weight:700">103x</td></tr>
         </table>
       </div>
     </div>
@@ -320,16 +324,16 @@ tr:hover td{background:#f7f8fa}
       <div class="cb scroll-x">
         <table>
           <tr><th>#</th><th>Campaign</th><th>Leads</th><th>Investment (Rp Juta)</th><th>Deal/Win (Rp B)</th><th>ROI</th></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">1</td><td style="font-size:10px">CX Day 2024 - Yogyakarta (Sep)</td><td>447</td><td>299,28</td><td style="color:#16a34a;font-weight:800">6.67</td><td>22.3x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">2</td><td style="font-size:10px">Tech Day 2025 - Medan (Mei)</td><td>411</td><td>252,14</td><td style="color:#16a34a;font-weight:800">6.18</td><td>24.5x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">3</td><td style="font-size:10px">Innovation Summit 2024 - Yogyakarta</td><td>228</td><td>300,37</td><td style="color:#3b82d4;font-weight:700">5.27</td><td>17.5x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">4</td><td style="font-size:10px">AI Roadshow 2025 - Jakarta (Agt)</td><td>424</td><td>204,18</td><td style="color:#3b82d4;font-weight:700">5.22</td><td>25.6x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">5</td><td style="font-size:10px">AI Roadshow 2024 - Makassar (Sep)</td><td>372</td><td>247,19</td><td style="color:#3b82d4;font-weight:700">4.91</td><td>19.9x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">6</td><td style="font-size:10px">Innovation Summit 2025 - Yogyakarta</td><td>449</td><td>302,00</td><td>4.57</td><td>15.1x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">7</td><td style="font-size:10px">AI Roadshow 2024 - Jakarta (Des)</td><td>318</td><td>426,92</td><td>4.44</td><td>10.4x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">8</td><td style="font-size:10px">AI Roadshow 2025 - Yogyakarta (Jun)</td><td>418</td><td>340,16</td><td>4.32</td><td>12.7x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">9</td><td style="font-size:10px">CX Day 2025 - Bandung (Jul)</td><td>409</td><td>405,71</td><td>4.26</td><td>10.5x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">10</td><td style="font-size:10px">Tech Day 2024 - Bali (Jun)</td><td>310</td><td>316,54</td><td>4.21</td><td>13.3x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">1</td><td><span class="campaign-name">CX Day 2024 - Yogyakarta (Sep)</span></td><td>447</td><td>299,28</td><td style="color:#16a34a;font-weight:800">6.67</td><td>22.3x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">2</td><td><span class="campaign-name">Tech Day 2025 - Medan (Mei)</span></td><td>411</td><td>252,14</td><td style="color:#16a34a;font-weight:800">6.18</td><td>24.5x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">3</td><td><span class="campaign-name">Innovation Summit 2024 - Yogyakarta</span></td><td>228</td><td>300,37</td><td style="color:#3b82d4;font-weight:700">5.27</td><td>17.5x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">4</td><td><span class="campaign-name">AI Roadshow 2025 - Jakarta (Agt)</span></td><td>424</td><td>204,18</td><td style="color:#3b82d4;font-weight:700">5.22</td><td>25.6x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">5</td><td><span class="campaign-name">AI Roadshow 2024 - Makassar (Sep)</span></td><td>372</td><td>247,19</td><td style="color:#3b82d4;font-weight:700">4.91</td><td>19.9x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">6</td><td><span class="campaign-name">Innovation Summit 2025 - Yogyakarta</span></td><td>449</td><td>302,00</td><td>4.57</td><td>15.1x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">7</td><td><span class="campaign-name">AI Roadshow 2024 - Jakarta (Des)</span></td><td>318</td><td>426,92</td><td>4.44</td><td>10.4x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">8</td><td><span class="campaign-name">AI Roadshow 2025 - Yogyakarta (Jun)</span></td><td>418</td><td>340,16</td><td>4.32</td><td>12.7x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">9</td><td><span class="campaign-name">CX Day 2025 - Bandung (Jul)</span></td><td>409</td><td>405,71</td><td>4.26</td><td>10.5x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">10</td><td><span class="campaign-name">Tech Day 2024 - Bali (Jun)</span></td><td>310</td><td>316,54</td><td>4.21</td><td>13.3x</td></tr>
         </table>
       </div>
     </div>
@@ -505,20 +509,20 @@ tr:hover td{background:#f7f8fa}
         <div style="font-size:10px;font-weight:700;color:#57606a;margin-bottom:6px">📅 2024</div>
         <table style="margin-bottom:10px">
           <tr><th>Campaign</th><th>Leads</th><th>Investment (Rp Juta)</th><th>Deal/Win (Rp B)</th><th>ROI</th></tr>
-          <tr><td style="font-size:10px">CX Day - Yogyakarta (Sep)</td><td>447</td><td>299,28</td><td style="color:#16a34a;font-weight:800">6.67</td><td>22.3x</td></tr>
-          <tr><td style="font-size:10px">Innovation Summit - Yogyakarta (Mar)</td><td>228</td><td>300,37</td><td style="color:#3b82d4;font-weight:700">5.27</td><td>17.5x</td></tr>
-          <tr><td style="font-size:10px">AI Roadshow - Makassar (Sep)</td><td>372</td><td>247,19</td><td style="color:#3b82d4;font-weight:700">4.91</td><td>19.9x</td></tr>
-          <tr><td style="font-size:10px">AI Roadshow - Jakarta (Des)</td><td>318</td><td>426,92</td><td>4.44</td><td>10.4x</td></tr>
-          <tr><td style="font-size:10px">Tech Day - Bali (Jun)</td><td>310</td><td>316,54</td><td>4.21</td><td>13.3x</td></tr>
+          <tr><td><span class="campaign-name">CX Day - Yogyakarta (Sep)</span></td><td>447</td><td>299,28</td><td style="color:#16a34a;font-weight:800">6.67</td><td>22.3x</td></tr>
+          <tr><td><span class="campaign-name">Innovation Summit - Yogyakarta (Mar)</span></td><td>228</td><td>300,37</td><td style="color:#3b82d4;font-weight:700">5.27</td><td>17.5x</td></tr>
+          <tr><td><span class="campaign-name">AI Roadshow - Makassar (Sep)</span></td><td>372</td><td>247,19</td><td style="color:#3b82d4;font-weight:700">4.91</td><td>19.9x</td></tr>
+          <tr><td><span class="campaign-name">AI Roadshow - Jakarta (Des)</span></td><td>318</td><td>426,92</td><td>4.44</td><td>10.4x</td></tr>
+          <tr><td><span class="campaign-name">Tech Day - Bali (Jun)</span></td><td>310</td><td>316,54</td><td>4.21</td><td>13.3x</td></tr>
         </table>
         <div style="font-size:10px;font-weight:700;color:#57606a;margin-bottom:6px">📅 2025</div>
         <table>
           <tr><th>Campaign</th><th>Leads</th><th>Investment (Rp Juta)</th><th>Deal/Win (Rp B)</th><th>ROI</th></tr>
-          <tr><td style="font-size:10px">Tech Day - Medan (Mei)</td><td>411</td><td>252,14</td><td style="color:#16a34a;font-weight:800">6.18</td><td>24.5x</td></tr>
-          <tr><td style="font-size:10px">AI Roadshow - Jakarta (Agt)</td><td>424</td><td>204,18</td><td style="color:#3b82d4;font-weight:700">5.22</td><td>25.6x</td></tr>
-          <tr><td style="font-size:10px">Innovation Summit - Yogyakarta (Feb)</td><td>449</td><td>302,00</td><td style="color:#3b82d4;font-weight:700">4.57</td><td>15.1x</td></tr>
-          <tr><td style="font-size:10px">AI Roadshow - Yogyakarta (Jun)</td><td>418</td><td>340,16</td><td>4.32</td><td>12.7x</td></tr>
-          <tr><td style="font-size:10px">CX Day - Bandung (Jul)</td><td>409</td><td>405,71</td><td>4.26</td><td>10.5x</td></tr>
+          <tr><td><span class="campaign-name">Tech Day - Medan (Mei)</span></td><td>411</td><td>252,14</td><td style="color:#16a34a;font-weight:800">6.18</td><td>24.5x</td></tr>
+          <tr><td><span class="campaign-name">AI Roadshow - Jakarta (Agt)</span></td><td>424</td><td>204,18</td><td style="color:#3b82d4;font-weight:700">5.22</td><td>25.6x</td></tr>
+          <tr><td><span class="campaign-name">Innovation Summit - Yogyakarta (Feb)</span></td><td>449</td><td>302,00</td><td style="color:#3b82d4;font-weight:700">4.57</td><td>15.1x</td></tr>
+          <tr><td><span class="campaign-name">AI Roadshow - Yogyakarta (Jun)</span></td><td>418</td><td>340,16</td><td>4.32</td><td>12.7x</td></tr>
+          <tr><td><span class="campaign-name">CX Day - Bandung (Jul)</span></td><td>409</td><td>405,71</td><td>4.26</td><td>10.5x</td></tr>
         </table>
       </div>
     </div>
