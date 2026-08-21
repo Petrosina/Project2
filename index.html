@@ -170,24 +170,22 @@ tr:hover td{background:#f7f8fa}
 
   <div class="card">
     <div class="ch"><h3>Industri — Conversion Rate (Deal Won %)</h3><span style="font-size:9px;color:#57606a">Deal Won ÷ Total Leads</span></div>
-    <div class="cb" style="display:flex;flex-direction:column;justify-content:space-between;overflow-x:auto">
-      <div>
-        <div style="font-size:9px;color:#57606a;margin-bottom:6px">📊 <b>Deal Rate</b> = Jumlah lead yang berhasil jadi Deal Won ÷ Total Leads × 100%. Contoh: 163 deal dari 7.638 leads = 2,1%. <b>Grafik</b> = proporsi relatif terhadap industri tertinggi (Minyak &amp; Gas).</div>
-        <table>
-          <tr><th>#</th><th>Industri</th><th>Total Leads</th><th>Deal Won</th><th>Deal Rate (%)</th><th>Grafik Deal Rate</th></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">1</td><td>Minyak &amp; Gas</td><td>7,638</td><td>163</td><td style="color:#16a34a;font-weight:800">2,1%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#16a34a"></div></div></td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">2</td><td>Telekomunikasi</td><td>13,886</td><td>261</td><td style="color:#3b82d4;font-weight:700">1,9%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:90%;background:#3b82d4"></div></div></td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">3</td><td>Teknologi / IT</td><td>15,529</td><td>283</td><td style="color:#3b82d4;font-weight:700">1,8%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:87%;background:#3b82d4"></div></div></td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">4</td><td>Kesehatan</td><td>11,034</td><td>198</td><td style="color:#3b82d4;font-weight:700">1,8%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:86%;background:#7c5cd8"></div></div></td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">5</td><td>Manufaktur</td><td>17,135</td><td>302</td><td style="color:#3b82d4;font-weight:700">1,8%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:85%;background:#7c5cd8"></div></div></td></tr>
-          <tr><td>6</td><td>Perbankan &amp; Keu.</td><td>18,754</td><td>301</td><td>1,6%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:76%;background:#0891b2"></div></div></td></tr>
-          <tr><td>7</td><td>Ritel &amp; Consumer</td><td>15,526</td><td>258</td><td>1,7%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:80%;background:#0891b2"></div></div></td></tr>
-          <tr><td>8</td><td>Asuransi</td><td>9,269</td><td>139</td><td style="color:#e11d48;font-weight:700">1,5%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:72%;background:#e11d48"></div></div></td></tr>
-        </table>
-      </div>
-      <div style="font-size:9px;color:#57606a;margin-top:8px;padding-top:8px;border-top:1px solid #f0f2f5">
-        🏆 Minyak &amp; Gas = best converting (2,1%) &nbsp;·&nbsp; Asuransi = lowest (1,5%) &nbsp;·&nbsp; Selisih sempit antar industri menunjukkan pola distribusi merata
-      </div>
+    <div class="cb" style="display:flex;flex-direction:column;overflow-x:auto">
+      <div style="font-size:9px;color:#57606a;margin-bottom:6px;flex-shrink:0">📊 <b>Deal Rate</b> = Jumlah lead yang berhasil jadi Deal Won ÷ Total Leads × 100%. Contoh: 163 deal dari 7.638 leads = 2,1%. <b>Grafik</b> = proporsi relatif terhadap industri tertinggi (Minyak &amp; Gas).</div>
+      <table style="height:100%;table-layout:fixed">
+        <colgroup><col style="width:28px"><col style="width:130px"><col style="width:85px"><col style="width:70px"><col style="width:85px"><col></colgroup>
+        <thead><tr><th>#</th><th>Industri</th><th>Total Leads</th><th>Deal Won</th><th>Deal Rate (%)</th><th>Grafik Deal Rate</th></tr></thead>
+        <tbody style="height:100%">
+          <tr style="height:12.5%"><td style="color:#3b82d4;font-weight:700">1</td><td>Minyak &amp; Gas</td><td>7,638</td><td>163</td><td style="color:#16a34a;font-weight:800">2,1%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#16a34a"></div></div></td></tr>
+          <tr style="height:12.5%"><td style="color:#3b82d4;font-weight:700">2</td><td>Telekomunikasi</td><td>13,886</td><td>261</td><td style="color:#3b82d4;font-weight:700">1,9%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:90%;background:#3b82d4"></div></div></td></tr>
+          <tr style="height:12.5%"><td style="color:#3b82d4;font-weight:700">3</td><td>Teknologi / IT</td><td>15,529</td><td>283</td><td style="color:#3b82d4;font-weight:700">1,8%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:87%;background:#3b82d4"></div></div></td></tr>
+          <tr style="height:12.5%"><td style="color:#3b82d4;font-weight:700">4</td><td>Kesehatan</td><td>11,034</td><td>198</td><td style="color:#3b82d4;font-weight:700">1,8%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:86%;background:#7c5cd8"></div></div></td></tr>
+          <tr style="height:12.5%"><td style="color:#3b82d4;font-weight:700">5</td><td>Manufaktur</td><td>17,135</td><td>302</td><td style="color:#3b82d4;font-weight:700">1,8%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:85%;background:#7c5cd8"></div></div></td></tr>
+          <tr style="height:12.5%"><td>6</td><td>Perbankan &amp; Keu.</td><td>18,754</td><td>301</td><td>1,6%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:76%;background:#0891b2"></div></div></td></tr>
+          <tr style="height:12.5%"><td>7</td><td>Ritel &amp; Consumer</td><td>15,526</td><td>258</td><td>1,7%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:80%;background:#0891b2"></div></div></td></tr>
+          <tr style="height:12.5%"><td>8</td><td>Asuransi</td><td>9,269</td><td>139</td><td style="color:#e11d48;font-weight:700">1,5%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:72%;background:#e11d48"></div></div></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
@@ -268,28 +266,25 @@ tr:hover td{background:#f7f8fa}
 
   <div class="card">
     <div class="ch"><h3>🏆 Top 5 Campaigns — Deal Value Tertinggi</h3></div>
-    <div class="cb" style="display:flex;flex-direction:column;justify-content:space-between">
-      <div>
-        <table>
-          <tr><th>#</th><th>Campaign</th><th>Leads</th><th>Investment (Rp Juta)</th><th>Deal/Win (Rp Miliar)</th><th>ROI</th></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">1</td><td><span class="campaign-name">CX Day 2024 - Yogyakarta (Sep)</span></td><td>447</td><td>299,28</td><td style="font-weight:800;color:#16a34a">6,67</td><td>22.3x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">2</td><td><span class="campaign-name">Tech Day 2025 - Medan (Mei)</span></td><td>411</td><td>252,14</td><td style="font-weight:800;color:#16a34a">6,18</td><td>24.5x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">3</td><td><span class="campaign-name">Innovation Summit 2024 - Yogyakarta</span></td><td>228</td><td>300,37</td><td style="font-weight:800;color:#3b82d4">5,27</td><td>17.5x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">4</td><td><span class="campaign-name">AI Roadshow 2025 - Jakarta (Agt)</span></td><td>424</td><td>204,18</td><td style="font-weight:800;color:#3b82d4">5,22</td><td>25.6x</td></tr>
-          <tr><td style="color:#3b82d4;font-weight:700">5</td><td><span class="campaign-name">AI Roadshow 2024 - Makassar (Sep)</span></td><td>372</td><td>247,19</td><td style="font-weight:800;color:#3b82d4">4,91</td><td>19.9x</td></tr>
-        </table>
-        <hr style="border:none;border-top:1px solid #f0f2f5;margin:10px 0"/>
-        <div style="font-size:10px;font-weight:700;margin-bottom:6px">🥇 Top 3 Email Campaign (ROI)</div>
-        <table>
-          <tr><th>Campaign</th><th>Leads</th><th>Investment (Rp Juta)</th><th>CPL (Rp)</th><th>ROI</th></tr>
-          <tr><td><span class="campaign-name">Email - Event Invitation (Jan'24)</span></td><td>2,972</td><td>9,44</td><td>3,176</td><td style="color:#16a34a;font-weight:800">156x</td></tr>
-          <tr><td><span class="campaign-name">Email - Newsletter Bulanan (Jun'24)</span></td><td>2,586</td><td>11,70</td><td>4,526</td><td style="color:#16a34a;font-weight:800">150x</td></tr>
-          <tr><td><span class="campaign-name">Email - Lead Nurturing (Jul'25)</span></td><td>2,660</td><td>12,02</td><td>4,520</td><td style="color:#16a34a;font-weight:800">134x</td></tr>
-        </table>
-      </div>
-      <div style="font-size:9px;color:#57606a;margin-top:8px;padding-top:8px;border-top:1px solid #f0f2f5">
-        💡 Top event campaign: Yogyakarta &amp; Jakarta konsisten masuk top 5 &nbsp;·&nbsp; Email ROI mencapai 156x dengan CPL Rp 3.176
-      </div>
+    <div class="cb" style="display:flex;flex-direction:column">
+      <table style="flex-shrink:0">
+        <tr><th>#</th><th>Campaign</th><th>Leads</th><th>Investment (Rp Juta)</th><th>Deal/Win (Rp Miliar)</th><th>ROI</th></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">1</td><td><span class="campaign-name">CX Day 2024 - Yogyakarta (Sep)</span></td><td>447</td><td>299,28</td><td style="font-weight:800;color:#16a34a">6,67</td><td>22.3x</td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">2</td><td><span class="campaign-name">Tech Day 2025 - Medan (Mei)</span></td><td>411</td><td>252,14</td><td style="font-weight:800;color:#16a34a">6,18</td><td>24.5x</td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">3</td><td><span class="campaign-name">Innovation Summit 2024 - Yogyakarta</span></td><td>228</td><td>300,37</td><td style="font-weight:800;color:#3b82d4">5,27</td><td>17.5x</td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">4</td><td><span class="campaign-name">AI Roadshow 2025 - Jakarta (Agt)</span></td><td>424</td><td>204,18</td><td style="font-weight:800;color:#3b82d4">5,22</td><td>25.6x</td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">5</td><td><span class="campaign-name">AI Roadshow 2024 - Makassar (Sep)</span></td><td>372</td><td>247,19</td><td style="font-weight:800;color:#3b82d4">4,91</td><td>19.9x</td></tr>
+      </table>
+      <hr style="border:none;border-top:1px solid #f0f2f5;margin:10px 0;flex-shrink:0"/>
+      <div style="font-size:10px;font-weight:700;margin-bottom:6px;flex-shrink:0">🥇 Top 3 Email Campaign (ROI)</div>
+      <table style="height:100%">
+        <thead><tr><th>Campaign</th><th>Leads</th><th>Investment (Rp Juta)</th><th>CPL (Rp)</th><th>ROI</th></tr></thead>
+        <tbody style="height:100%">
+          <tr style="height:33.3%"><td><span class="campaign-name">Email - Event Invitation (Jan'24)</span></td><td>2,972</td><td>9,44</td><td>3,176</td><td style="color:#16a34a;font-weight:800">156x</td></tr>
+          <tr style="height:33.3%"><td><span class="campaign-name">Email - Newsletter Bulanan (Jun'24)</span></td><td>2,586</td><td>11,70</td><td>4,526</td><td style="color:#16a34a;font-weight:800">150x</td></tr>
+          <tr style="height:33.3%"><td><span class="campaign-name">Email - Lead Nurturing (Jul'25)</span></td><td>2,660</td><td>12,02</td><td>4,520</td><td style="color:#16a34a;font-weight:800">134x</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
