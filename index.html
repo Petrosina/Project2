@@ -49,13 +49,13 @@ body{font-family:-apple-system,"Segoe UI",system-ui,sans-serif;background:#f0f2f
 .up{color:#16a34a}.down{color:#dc2626}.flat{color:#57606a}
 
 /* GRID */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;align-items:stretch}
 @media(max-width:800px){.grid2{grid-template-columns:1fr}}
-.card{background:#fff;border-radius:8px;border:1px solid #e5e7eb;overflow:hidden;margin-bottom:14px}
+.card{background:#fff;border-radius:8px;border:1px solid #e5e7eb;overflow:hidden;margin-bottom:14px;display:flex;flex-direction:column}
 .card:last-child{margin-bottom:0}
-.ch{padding:10px 14px;border-bottom:1px solid #f0f2f5;display:flex;justify-content:space-between;align-items:center}
+.ch{padding:10px 14px;border-bottom:1px solid #f0f2f5;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
 .ch h3{font-size:12px;font-weight:700;color:#1d3557}
-.cb{padding:12px 14px}
+.cb{padding:12px 14px;flex:1;overflow:auto}
 
 /* TABLE */
 table{width:100%;border-collapse:collapse;font-size:11px}
@@ -99,7 +99,6 @@ tr:hover td{background:#f7f8fa}
 <!-- TOP BAR -->
 <div class="topbar">
   <div>
-    <div class="sub">IBM Indonesia · Marketing Intelligence</div>
     <h1>📊 Marketing Campaign Performance Dashboard</h1>
     <div class="badge-row">
       <span class="topbadge">📁 273 Campaigns</span>
@@ -443,7 +442,7 @@ tr:hover td{background:#f7f8fa}
   </div>
   <div class="grid2">
     <div class="card">
-      <div class="ch"><h3>Monthly Deal/Win (Rp B)</h3></div>
+      <div class="ch"><h3>Monthly Deal/Win (Rp Miliar)</h3></div>
       <div class="cb scroll-x">
         <table>
           <tr><th>Bulan</th><th>2024</th><th>2025</th><th>Δ</th></tr>
@@ -553,10 +552,10 @@ tr:hover td{background:#f7f8fa}
         <tr><th>Priority</th><th>Action</th><th>Channel</th><th>Expected Impact</th><th>Timeline</th></tr>
         <tr><td><span class="tag" style="background:#fee2e2;color:#dc2626">P1 – Segera</span></td><td>Scale Email Campaign budget +25%</td><td><span class="tag t-email">Email</span></td><td>ROI 100x+</td><td>Q1 2026</td></tr>
         <tr><td><span class="tag" style="background:#fee2e2;color:#dc2626">P1 – Segera</span></td><td>Fokus First-Party Event di Yogyakarta, Jakarta, Medan</td><td><span class="tag t-event">In-Person</span></td><td>Deal Rp 4–6B/event</td><td>Q1–Q2 2026</td></tr>
-        <tr><td><span class="tag" style="background:#fef3c7;color:#92400e">P2 – Penting</span></td><td>Ganti webinar sponsorship → IBM Webinar Series</td><td><span class="tag t-webinar">Webinar</span></td><td>ROI naik +6x</td><td>Q2 2026</td></tr>
-        <tr><td><span class="tag" style="background:#fef3c7;color:#92400e">P2 – Penting</span></td><td>Buat campaign vertikal O&amp;G &amp; Telco</td><td>Multi</td><td>Conv. rate 2.5%+</td><td>Q2 2026</td></tr>
+        <tr><td><span class="tag" style="background:#fef3c7;color:#92400e">P2 – Penting</span></td><td>Ganti webinar sponsorship → Webinar Series</td><td><span class="tag t-webinar">Webinar</span></td><td>ROI naik +6x</td><td>Q2 2026</td></tr>
+        <tr><td><span class="tag" style="background:#fef3c7;color:#92400e">P2 – Penting</span></td><td>Buat campaign vertikal O&amp;G &amp; Telco</td><td><span class="tag" style="background:#f3f4f6;color:#374151">Multi</span></td><td>Conv. rate 2.5%+</td><td>Q2 2026</td></tr>
         <tr><td><span class="tag" style="background:#f0fdf4;color:#15803d">P3 – Nice-to-Have</span></td><td>Shift social media dari Twitter/X ke LinkedIn</td><td><span class="tag t-social">Social</span></td><td>CPL efficiency</td><td>Q3 2026</td></tr>
-        <tr><td><span class="tag" style="background:#f0fdf4;color:#15803d">P3 – Nice-to-Have</span></td><td>Double down September campaign push</td><td>All</td><td>Peak season leverage</td><td>Q3 2026</td></tr>
+        <tr><td><span class="tag" style="background:#f0fdf4;color:#15803d">P3 – Nice-to-Have</span></td><td>Double down September campaign push</td><td><span class="tag" style="background:#f3f4f6;color:#374151">All</span></td><td>Peak season leverage</td><td>Q3 2026</td></tr>
       </table>
     </div>
   </div>
