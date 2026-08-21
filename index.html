@@ -4,94 +4,94 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>IBM Marketing Campaign Dashboard 2024–2025</title>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,"Segoe UI",system-ui,sans-serif;background:#f0f2f5;color:#1f2328;font-size:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Segoe UI",system-ui,sans-serif;background:#f0f2f5;color:#1f2328;font-size:13px;line-height:1.5}
 
-  /* NAV */
-  .topbar{background:#1d3557;color:#fff;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.25)}
-  .topbar h1{font-size:17px;font-weight:700;letter-spacing:.3px}
-  .topbar .sub{font-size:11px;color:#a8c4e0;margin-top:2px}
+/* TOP BAR */
+.topbar{background:#1d3557;color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.topbar h1{font-size:16px;font-weight:700}
+.topbar .sub{font-size:10px;color:#a8c4e0;margin-top:2px}
+.badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.topbadge{display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:20px;font-size:10px;font-weight:600;background:rgba(255,255,255,.12);color:#e0f0ff}
 
-  /* FILTER BAR */
-  .filter-bar{background:#fff;border-bottom:1px solid #e5e7eb;padding:8px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:50px;z-index:98;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-  .filter-bar .filter-label{font-size:11px;font-weight:700;color:#57606a;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
-  .year-toggle{display:flex;gap:6px}
-  .year-toggle button{padding:5px 16px;border:1.5px solid #d1d5db;border-radius:20px;background:#fff;color:#57606a;cursor:pointer;font-size:12px;font-weight:600;transition:all .18s}
-  .year-toggle button:hover{border-color:#3b82d4;color:#3b82d4}
-  .year-toggle button.active{background:#1d3557;border-color:#1d3557;color:#fff}
+/* FILTER BAR */
+.filter-bar{background:#fff;border-bottom:1px solid #e5e7eb;padding:7px 24px;display:flex;align-items:center;gap:14px;position:sticky;top:68px;z-index:99;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.filter-label{font-size:10px;font-weight:700;color:#57606a;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.year-toggle{display:flex;gap:6px}
+.year-toggle button{padding:4px 14px;border:1.5px solid #d1d5db;border-radius:20px;background:#fff;color:#57606a;cursor:pointer;font-size:11px;font-weight:600;transition:all .15s}
+.year-toggle button:hover{border-color:#3b82d4;color:#3b82d4}
+.year-toggle button.active{background:#1d3557;border-color:#1d3557;color:#fff}
+.filter-status{margin-left:auto;font-size:11px;color:#57606a}
 
-  /* TAB NAV */
-  .tab-nav{background:#fff;border-bottom:2px solid #e5e7eb;display:flex;gap:0;padding:0 24px;position:sticky;top:97px;z-index:97;overflow-x:auto}
-  .tab-nav button{padding:11px 18px;border:none;background:transparent;cursor:pointer;font-size:13px;color:#57606a;border-bottom:3px solid transparent;font-weight:500;transition:all .2s;white-space:nowrap;margin-bottom:-2px}
-  .tab-nav button.active{color:#1d3557;border-bottom-color:#3b82d4;font-weight:700}
-  .tab-nav button:hover{color:#1d3557;background:#f7f8fa}
+/* TAB NAV */
+.tab-nav{background:#fff;border-bottom:2px solid #e5e7eb;display:flex;padding:0 24px;position:sticky;top:106px;z-index:98;overflow-x:auto}
+.tab-nav button{padding:10px 16px;border:none;background:transparent;cursor:pointer;font-size:12px;color:#57606a;border-bottom:3px solid transparent;font-weight:500;transition:all .15s;white-space:nowrap;margin-bottom:-2px}
+.tab-nav button.active{color:#1d3557;border-bottom-color:#3b82d4;font-weight:700}
+.tab-nav button:hover{color:#1d3557;background:#f7f8fa}
 
-  /* LAYOUT */
-  .tab-content{display:none;padding:20px 24px;max-width:1400px;margin:0 auto}
-  .tab-content.active{display:block}
+/* TAB PANES */
+.tab-pane{display:none}
+.tab-pane.active{display:block}
 
-  /* KPI ROW */
-  .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:20px}
-  .kpi-card{background:#fff;border-radius:10px;padding:16px 18px;border:1px solid #e5e7eb;position:relative;overflow:hidden}
-  .kpi-card::before{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent,#3b82d4)}
-  .kpi-card .label{font-size:11px;color:#57606a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-  .kpi-card .value{font-size:22px;font-weight:700;color:#1d3557}
-  .kpi-card .sub{font-size:11px;color:#57606a;margin-top:4px}
-  .kpi-card .delta{font-size:11px;font-weight:600;margin-top:3px}
-  .delta.up{color:#16a34a} .delta.down{color:#dc2626} .delta.flat{color:#57606a}
+/* BODY */
+.body{padding:18px 24px;max-width:1200px;margin:0 auto}
 
-  /* GRID */
-  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
-  .grid-1{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:16px}
-  @media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
+/* KPI */
+.kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:18px}
+@media(max-width:900px){.kpi-row{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:500px){.kpi-row{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:#fff;border-radius:8px;border:1px solid #e5e7eb;padding:12px 14px;border-top:3px solid var(--c,#3b82d4)}
+.kpi .label{font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:#57606a;margin-bottom:4px}
+.kpi .val{font-size:18px;font-weight:800;color:#1d3557}
+.kpi .sub2{font-size:9px;color:#57606a;margin-top:2px}
+.kpi .delta{font-size:10px;font-weight:700;margin-top:3px}
+.up{color:#16a34a}.down{color:#dc2626}.flat{color:#57606a}
 
-  /* CARD */
-  .card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden}
-  .card-header{padding:14px 18px;border-bottom:1px solid #f0f2f5;display:flex;align-items:center;justify-content:space-between}
-  .card-header h3{font-size:13px;font-weight:700;color:#1d3557}
-  .card-header .badge{font-size:10px;padding:2px 8px;border-radius:10px;background:#eff6ff;color:#3b82d4;font-weight:600}
-  .card-body{padding:16px 18px}
-  .chart-box{padding:0 10px 10px}
+/* GRID */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+.card{background:#fff;border-radius:8px;border:1px solid #e5e7eb;overflow:hidden;margin-bottom:14px}
+.card:last-child{margin-bottom:0}
+.ch{padding:10px 14px;border-bottom:1px solid #f0f2f5;display:flex;justify-content:space-between;align-items:center}
+.ch h3{font-size:12px;font-weight:700;color:#1d3557}
+.cb{padding:12px 14px}
 
-  /* TABLE */
-  table{width:100%;border-collapse:collapse;font-size:12px}
-  th{background:#f7f8fa;color:#57606a;text-align:left;padding:8px 10px;border-bottom:2px solid #e5e7eb;font-weight:600;font-size:11px;text-transform:uppercase;white-space:nowrap}
-  td{padding:7px 10px;border-bottom:1px solid #f0f2f5;color:#1f2328;vertical-align:middle}
-  tr:hover td{background:#f7f8fa}
-  .rank{font-weight:700;color:#3b82d4;font-size:11px}
-  .tag{display:inline-block;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:600}
-  .tag-email{background:#eff6ff;color:#3b82d4}
-  .tag-event{background:#fef3c7;color:#92400e}
-  .tag-social{background:#f0fdf4;color:#15803d}
-  .tag-web{background:#fdf4ff;color:#7c3aed}
-  .tag-webinar{background:#fff7ed;color:#c2410c}
-  .tag-digi{background:#eff6ff;color:#0369a1}
-  .bar-mini{background:#e5e7eb;border-radius:4px;height:6px;margin-top:4px}
-  .bar-mini-fill{height:6px;border-radius:4px;background:#3b82d4}
+/* TABLE */
+table{width:100%;border-collapse:collapse;font-size:11px}
+th{background:#f7f8fa;padding:6px 8px;text-align:left;color:#57606a;font-size:10px;text-transform:uppercase;border-bottom:2px solid #e5e7eb;white-space:nowrap}
+td{padding:6px 8px;border-bottom:1px solid #f0f2f5}
+tr:last-child td{border:none}
+tr:hover td{background:#f7f8fa}
+.tag{display:inline-block;padding:1px 6px;border-radius:8px;font-size:9px;font-weight:700}
+.t-email{background:#eff6ff;color:#1d4ed8}
+.t-event{background:#fef3c7;color:#92400e}
+.t-web{background:#fdf4ff;color:#7c3aed}
+.t-social{background:#f0fdf4;color:#15803d}
+.t-webinar{background:#fff7ed;color:#c2410c}
+.bar-wrap{background:#f0f2f5;border-radius:4px;height:7px;width:100%;overflow:hidden}
+.bar-fill{height:7px;border-radius:4px}
 
-  /* INSIGHT BOX */
-  .insight-box{background:#eff6ff;border-left:4px solid #3b82d4;border-radius:8px;padding:12px 16px;font-size:12px;color:#1e3a5f;line-height:1.6}
-  .insight-box.green{background:#f0fdf4;border-color:#16a34a;color:#14532d}
-  .insight-box.yellow{background:#fffbeb;border-color:#f59e0b;color:#78350f}
-  .insight-box.red{background:#fff1f2;border-color:#e11d48;color:#9f1239}
-  .insight-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-  @media(max-width:700px){.insight-grid{grid-template-columns:1fr}}
+/* INSIGHT */
+.ig{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:700px){.ig{grid-template-columns:1fr}}
+.ibox{padding:10px 12px;border-radius:7px;border-left:3px solid;font-size:11px;line-height:1.55}
+.ibox.g{background:#f0fdf4;border-color:#16a34a;color:#14532d}
+.ibox.b{background:#eff6ff;border-color:#3b82d4;color:#1e3a5f}
+.ibox.y{background:#fffbeb;border-color:#f59e0b;color:#78350f}
+.ibox.r{background:#fff1f2;border-color:#e11d48;color:#9f1239}
 
-  /* COMPARISON TABLE */
-  .comp-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:8px 0;border-bottom:1px solid #f0f2f5;align-items:center;font-size:12px}
-  .comp-row.header{font-weight:700;color:#57606a;font-size:11px;text-transform:uppercase}
-  .comp-val{text-align:right}
-  .arrow{font-size:14px}
+/* YoY comparison rows */
+.yoy-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:6px;padding:6px 0;border-bottom:1px solid #f0f2f5;font-size:11px;align-items:center}
+.yoy-row.hdr{font-size:10px;font-weight:700;color:#57606a;text-transform:uppercase}
+.rv{text-align:right;font-weight:600}
 
-  /* SECTION TITLE */
-  .section-title{font-size:13px;font-weight:700;color:#1d3557;margin:18px 0 10px;display:flex;align-items:center;gap:8px}
-  .section-title::before{content:"";display:block;width:4px;height:16px;background:#3b82d4;border-radius:2px}
+/* Section title */
+.stitle{font-size:12px;font-weight:700;color:#1d3557;margin:0 0 10px;display:flex;align-items:center;gap:6px}
+.stitle::before{content:"";display:block;width:3px;height:14px;background:#3b82d4;border-radius:2px}
 
-  .full-width{grid-column:1/-1}
-  .scroll-x{overflow-x:auto}
+/* scroll */
+.scroll-x{overflow-x:auto}
 </style>
 </head>
 <body>
@@ -101,8 +101,15 @@
   <div>
     <div class="sub">IBM Indonesia · Marketing Intelligence</div>
     <h1>📊 Marketing Campaign Performance Dashboard</h1>
+    <div class="badge-row">
+      <span class="topbadge">📁 273 Campaigns</span>
+      <span class="topbadge">👥 164,568 Leads</span>
+      <span class="topbadge">💰 Rp 24.02B Invested</span>
+      <span class="topbadge">🏆 ROI avg 11.1x</span>
+      <span class="topbadge">📅 2024–2025</span>
+    </div>
   </div>
-  <div style="font-size:11px;color:#a8c4e0;text-align:right">Data: 2024 – 2025<br>273 Campaigns · 164,568 Leads</div>
+  <div style="text-align:right;font-size:10px;color:#a8c4e0">Data Source: Claude_marketing campaign.xlsx<br>Sheets: Leads (164,568 rows) + Data Campaign (273 rows)</div>
 </div>
 
 <!-- FILTER BAR -->
@@ -113,12 +120,12 @@
     <button onclick="setYear('2024',this)" id="btn-2024">2024</button>
     <button onclick="setYear('2025',this)" id="btn-2025">2025</button>
   </div>
-  <div style="margin-left:auto;font-size:11px;color:#57606a" id="filter-status">Menampilkan data: Semua Tahun (2024 &amp; 2025)</div>
+  <div class="filter-status" id="filter-status">Menampilkan data: Semua Tahun (2024 &amp; 2025)</div>
 </div>
 
-<!-- TAB NAVIGATION -->
+<!-- TAB NAV -->
 <div class="tab-nav">
-  <button class="active" onclick="showTab('overview',this)">📈 Overview</button>
+  <button onclick="showTab('overview',this)" class="active">📈 Overview</button>
   <button onclick="showTab('roi',this)">💡 ROI &amp; Efisiensi</button>
   <button onclick="showTab('industry',this)">🏭 Industri &amp; Konversi</button>
   <button onclick="showTab('seasonal',this)">📅 Tren Musiman</button>
@@ -126,716 +133,448 @@
   <button onclick="showTab('recommendations',this)">🎯 Insights &amp; Rekomendasi</button>
 </div>
 
-<!-- ======================== TAB: OVERVIEW ======================== -->
-<div id="tab-overview" class="tab-content active">
+<!-- ════════════════ TAB: OVERVIEW ════════════════ -->
+<div id="tab-overview" class="tab-pane active">
+<div class="body">
 
-  <div class="kpi-row" id="kpi-row">
-    <div class="kpi-card" style="--accent:#3b82d4">
-      <div class="label">Total Campaigns</div>
-      <div class="value" id="kpi-campaigns">273</div>
-      <div class="sub">Active campaigns 2024–2025</div>
-    </div>
-    <div class="kpi-card" style="--accent:#7c5cd8">
-      <div class="label">Total Leads</div>
-      <div class="value" id="kpi-leads">164,568</div>
-      <div class="sub" id="kpi-leads-sub">All channels combined</div>
-    </div>
-    <div class="kpi-card" style="--accent:#0891b2">
-      <div class="label">Total Investment</div>
-      <div class="value" id="kpi-invest">Rp 24,02B</div>
-      <div class="sub">Combined marketing spend</div>
-    </div>
-    <div class="kpi-card" style="--accent:#16a34a">
-      <div class="label">Total Deal/Win</div>
-      <div class="value" id="kpi-deal">Rp 266,38B</div>
-      <div class="sub">Estimated closed revenue</div>
-    </div>
-    <div class="kpi-card" style="--accent:#f59e0b">
-      <div class="label">Avg. ROI</div>
-      <div class="value" id="kpi-roi">11.1x</div>
-      <div class="sub">Deal / Investment ratio</div>
-    </div>
-    <div class="kpi-card" style="--accent:#e11d48">
-      <div class="label">Total Opportunity</div>
-      <div class="value" id="kpi-opp">Rp 1.157B</div>
-      <div class="sub">Pipeline value estimate</div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header"><h3>Lead Volume per Tipe Channel</h3><span class="badge">All Years</span></div>
-      <div class="chart-box"><div id="chart-channel-leads" style="height:280px"></div></div>
-    </div>
-    <div class="card">
-      <div class="card-header"><h3>Investment vs Deal/Win per Kategori</h3><span class="badge">IDR Billion</span></div>
-      <div class="chart-box"><div id="chart-cat-invest-deal" style="height:280px"></div></div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header"><h3>Distribusi Campaign per Channel</h3></div>
-      <div class="chart-box"><div id="chart-campaign-dist" style="height:260px"></div></div>
-    </div>
-    <div class="card">
-      <div class="card-header"><h3>ROI per Tipe Channel</h3><span class="badge">Deal/Invest</span></div>
-      <div class="chart-box"><div id="chart-roi-channel" style="height:260px"></div></div>
-    </div>
-  </div>
+<div class="kpi-row">
+  <div class="kpi" style="--c:#3b82d4"><div class="label">Total Campaigns</div><div class="val" id="kv-campaigns">273</div><div class="sub2" id="ks-campaigns">140 (2024) + 133 (2025)</div></div>
+  <div class="kpi" style="--c:#7c5cd8"><div class="label">Total Leads</div><div class="val" id="kv-leads">164,568</div><div class="sub2">All channels</div><div class="delta down" id="kd-leads">▼ 6.6% YoY</div></div>
+  <div class="kpi" style="--c:#0891b2"><div class="label">Total Investment</div><div class="val" id="kv-invest">Rp 24.02B</div><div class="sub2">Marketing spend</div><div class="delta down" id="kd-invest">▼ 3.6% YoY</div></div>
+  <div class="kpi" style="--c:#16a34a"><div class="label">Total Deal/Win</div><div class="val" id="kv-deal">Rp 266.4B</div><div class="sub2">Closed revenue</div><div class="delta up" id="kd-deal">▲ +0.3% YoY</div></div>
+  <div class="kpi" style="--c:#f59e0b"><div class="label">Avg. ROI</div><div class="val" id="kv-roi">11.1x</div><div class="sub2">Deal / Investment</div><div class="delta up" id="kd-roi">▲ +3.9% YoY</div></div>
+  <div class="kpi" style="--c:#e11d48"><div class="label">Total Opportunity</div><div class="val" id="kv-opp">Rp 1,157B</div><div class="sub2">Pipeline estimate</div><div class="delta flat">≈ Flat YoY</div></div>
 </div>
 
-<!-- ======================== TAB: ROI & EFISIENSI ======================== -->
-<div id="tab-roi" class="tab-content">
-  <div class="section-title">Top Campaigns — ROI Tertinggi (Deal/Win ÷ Investment)</div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header"><h3>Top 10 Campaign — ROI Tertinggi</h3><span class="badge">Email dominates</span></div>
-      <div class="card-body scroll-x">
-        <table>
-          <tr><th>#</th><th>Campaign</th><th>Channel</th><th>Leads</th><th>CPL (Rp)</th><th>Deal (Rp B)</th><th>ROI</th></tr>
-          <tr><td class="rank">1</td><td>Email Campaign - Event Invitation (Jan 2024)</td><td><span class="tag tag-email">Email</span></td><td>2,972</td><td>3,176</td><td>1.47</td><td><b>156x</b></td></tr>
-          <tr><td class="rank">2</td><td>Email Campaign - Newsletter Bulanan (Jun 2024)</td><td><span class="tag tag-email">Email</span></td><td>2,586</td><td>4,526</td><td>1.76</td><td><b>150x</b></td></tr>
-          <tr><td class="rank">3</td><td>Email Campaign - Lead Nurturing (Jul 2025)</td><td><span class="tag tag-email">Email</span></td><td>2,660</td><td>4,520</td><td>1.62</td><td><b>134x</b></td></tr>
-          <tr><td class="rank">4</td><td>Email Campaign - Case Study (Nov 2025)</td><td><span class="tag tag-email">Email</span></td><td>2,212</td><td>4,143</td><td>1.23</td><td><b>134x</b></td></tr>
-          <tr><td class="rank">5</td><td>Email Campaign - Case Study (Okt 2024)</td><td><span class="tag tag-email">Email</span></td><td>2,983</td><td>2,945</td><td>1.09</td><td><b>124x</b></td></tr>
-          <tr><td class="rank">6</td><td>Email Campaign - Lead Nurturing (Mei 2024)</td><td><span class="tag tag-email">Email</span></td><td>1,762</td><td>6,310</td><td>1.28</td><td><b>115x</b></td></tr>
-          <tr><td class="rank">7</td><td>Email Campaign - Product Update (Feb 2024)</td><td><span class="tag tag-email">Email</span></td><td>2,544</td><td>4,575</td><td>1.33</td><td><b>114x</b></td></tr>
-          <tr><td class="rank">8</td><td>Email Campaign - Event Invitation (Apr 2025)</td><td><span class="tag tag-email">Email</span></td><td>2,858</td><td>4,269</td><td>1.31</td><td><b>107x</b></td></tr>
-          <tr><td class="rank">9</td><td>Email Campaign - Newsletter (Apr 2025)</td><td><span class="tag tag-email">Email</span></td><td>2,824</td><td>2,275</td><td>0.69</td><td><b>107x</b></td></tr>
-          <tr><td class="rank">10</td><td>Website - Free Trial Campaign (Sep 2025)</td><td><span class="tag tag-web">Website</span></td><td>999</td><td>10,813</td><td>1.12</td><td><b>103x</b></td></tr>
-        </table>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header"><h3>Cost Per Lead (CPL) per Channel</h3><span class="badge">Lower = Better</span></div>
-      <div class="chart-box"><div id="chart-cpl" style="height:300px"></div></div>
-    </div>
-  </div>
-
-  <div class="section-title">Top Campaigns — Deal Value Tertinggi (Absolute Revenue)</div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header"><h3>Top 10 Campaign — Deal/Win Terbesar</h3></div>
-      <div class="card-body scroll-x">
-        <table>
-          <tr><th>#</th><th>Campaign</th><th>Type</th><th>Leads</th><th>ROI</th><th>Deal (Rp B)</th></tr>
-          <tr><td class="rank">1</td><td>IBM Customer Experience Day 2024 - Yogyakarta (Sep)</td><td><span class="tag tag-event">In-Person</span></td><td>447</td><td>22.3x</td><td><b>6.67</b></td></tr>
-          <tr><td class="rank">2</td><td>IBM Technology Day 2025 - Medan (Mei)</td><td><span class="tag tag-event">In-Person</span></td><td>411</td><td>24.5x</td><td><b>6.18</b></td></tr>
-          <tr><td class="rank">3</td><td>IBM Innovation Summit 2024 - Yogyakarta (Mar)</td><td><span class="tag tag-event">In-Person</span></td><td>228</td><td>17.5x</td><td><b>5.27</b></td></tr>
-          <tr><td class="rank">4</td><td>IBM AI Roadshow 2025 - Jakarta (Agustus)</td><td><span class="tag tag-event">In-Person</span></td><td>424</td><td>25.6x</td><td><b>5.22</b></td></tr>
-          <tr><td class="rank">5</td><td>IBM AI Roadshow 2024 - Makassar (September)</td><td><span class="tag tag-event">In-Person</span></td><td>372</td><td>19.9x</td><td><b>4.91</b></td></tr>
-          <tr><td class="rank">6</td><td>IBM Innovation Summit 2025 - Yogyakarta (Feb)</td><td><span class="tag tag-event">In-Person</span></td><td>449</td><td>15.1x</td><td><b>4.57</b></td></tr>
-          <tr><td class="rank">7</td><td>IBM AI Roadshow 2024 - Jakarta (Desember)</td><td><span class="tag tag-event">In-Person</span></td><td>318</td><td>10.4x</td><td><b>4.44</b></td></tr>
-          <tr><td class="rank">8</td><td>IBM AI Roadshow 2025 - Yogyakarta (Juni)</td><td><span class="tag tag-event">In-Person</span></td><td>418</td><td>12.7x</td><td><b>4.32</b></td></tr>
-          <tr><td class="rank">9</td><td>IBM Customer Experience Day 2025 - Bandung (Juli)</td><td><span class="tag tag-event">In-Person</span></td><td>409</td><td>10.5x</td><td><b>4.26</b></td></tr>
-          <tr><td class="rank">10</td><td>IBM Technology Day 2024 - Bali (Juni)</td><td><span class="tag tag-event">In-Person</span></td><td>310</td><td>13.3x</td><td><b>4.21</b></td></tr>
-        </table>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header"><h3>ROI vs Deal Value — Channel Comparison</h3></div>
-      <div class="chart-box"><div id="chart-roi-scatter" style="height:300px"></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ======================== TAB: INDUSTRI ======================== -->
-<div id="tab-industry" class="tab-content">
-  <div class="section-title">Conversion Rate per Industri (Deal Won / Total Leads)</div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header"><h3>Deal Won Rate per Industri</h3><span class="badge">% of total leads</span></div>
-      <div class="chart-box"><div id="chart-industry-conv" style="height:360px"></div></div>
-    </div>
-    <div class="card">
-      <div class="card-header"><h3>Opportunity Rate per Industri</h3><span class="badge">% of total leads</span></div>
-      <div class="chart-box"><div id="chart-industry-opp" style="height:360px"></div></div>
-    </div>
-  </div>
+<div class="grid2">
   <div class="card">
-    <div class="card-header"><h3>Detail Industri — Lead, Opportunity & Deal Won</h3></div>
-    <div class="card-body scroll-x">
+    <div class="ch"><h3>Channel Performance — ROI &amp; Efisiensi</h3><span style="font-size:9px;color:#57606a">Semua Channel</span></div>
+    <div class="cb scroll-x">
       <table>
-        <tr><th>#</th><th>Industri</th><th>Total Leads</th><th>Opportunity</th><th>Deal Won</th><th>Deal Rate</th><th>Opp Rate</th><th>Pipeline Bar</th></tr>
-        <tr><td class="rank">1</td><td>Minyak &amp; Gas</td><td>7,638</td><td>371</td><td>163</td><td><b>2.1%</b></td><td>4.9%</td><td><div class="bar-mini"><div class="bar-mini-fill" style="width:100%"></div></div></td></tr>
-        <tr><td class="rank">2</td><td>Telekomunikasi</td><td>13,886</td><td>709</td><td>261</td><td><b>1.9%</b></td><td>5.1%</td><td><div class="bar-mini"><div class="bar-mini-fill" style="width:90%"></div></div></td></tr>
-        <tr><td class="rank">3</td><td>Teknologi / IT Services</td><td>15,529</td><td>788</td><td>283</td><td><b>1.8%</b></td><td>5.1%</td><td><div class="bar-mini"><div class="bar-mini-fill" style="width:87%"></div></div></td></tr>
-        <tr><td class="rank">4</td><td>Kesehatan</td><td>11,034</td><td>529</td><td>198</td><td><b>1.8%</b></td><td>4.8%</td><td><div class="bar-mini"><div class="bar-mini-fill" style="width:86%"></div></div></td></tr>
-        <tr><td class="rank">5</td><td>Manufaktur</td><td>17,135</td><td>819</td><td>302</td><td><b>1.8%</b></td><td>4.8%</td><td><div class="bar-mini"><div class="bar-mini-fill" style="width:86%"></div></div></td></tr>
-        <tr><td class="rank">6</td><td>Pemerintahan / Sektor Publik</td><td>12,199</td><td>629</td><td>208</td><td><b>1.7%</b></td><td>5.2%</td><td><div class="bar-mini"><div class="bar-mini-fill" style="width:82%"></div></div></td></tr>
-        <tr><td class="rank">7</td><td>Energi &amp; Utilitas</td><td>9,276</td><td>432</td><td>157</td><td><b>1.7%</b></td><td>4.7%</td><td><div class="bar-mini"><div class="bar-mini-fill" style="width:80%"></div></div></td></tr>
-        <tr><td class="rank">8</td><td>Ritel &amp; Consumer Goods</td><td>15,526</td><td>793</td><td>258</td><td><b>1.7%</b></td><td>5.1%</td><td><div class="bar-mini"><div class="bar-mini-fill" style="width:80%"></div></div></td></tr>
-        <tr><td class="rank">9</td><td>Logistik &amp; Transportasi</td><td>9,534</td><td>473</td><td>156</td><td><b>1.6%</b></td><td>5.0%</td><td><div class="bar-mini"><div class="bar-mini-fill" style="width:78%"></div></div></td></tr>
-        <tr><td class="rank">10</td><td>Pendidikan</td><td>7,864</td><td>405</td><td>127</td><td><b>1.6%</b></td><td>5.2%</td><td><div class="bar-mini"><div class="bar-mini-fill" style="width:77%"></div></div></td></tr>
-        <tr><td class="rank">11</td><td>Perbankan &amp; Jasa Keuangan</td><td>18,754</td><td>958</td><td>301</td><td><b>1.6%</b></td><td>5.1%</td><td><div class="bar-mini"><div class="bar-mini-fill" style="width:76%"></div></div></td></tr>
-        <tr><td class="rank">12</td><td>Otomotif</td><td>9,265</td><td>463</td><td>147</td><td><b>1.6%</b></td><td>5.0%</td><td><div class="bar-mini"><div class="bar-mini-fill" style="width:75%"></div></div></td></tr>
-        <tr><td class="rank">13</td><td>Media &amp; Hiburan</td><td>7,659</td><td>447</td><td>121</td><td><b>1.6%</b></td><td>5.8%</td><td><div class="bar-mini"><div class="bar-mini-fill" style="width:75%"></div></div></td></tr>
-        <tr><td class="rank">14</td><td>Asuransi</td><td>9,269</td><td>484</td><td>139</td><td><b>1.5%</b></td><td>5.2%</td><td><div class="bar-mini"><div class="bar-mini-fill" style="width:72%"></div></div></td></tr>
+        <tr><th>Tipe Channel</th><th>Leads</th><th>CPL (Rp)</th><th>Deal (Rp B)</th><th>ROI</th><th>Bar</th></tr>
+        <tr><td><span class="tag t-email">Email</span></td><td>72,776</td><td>5,367</td><td>24.97</td><td style="color:#16a34a;font-weight:800">63.9x</td><td><div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#3b82d4"></div></div></td></tr>
+        <tr><td><span class="tag t-web">Website</span></td><td>24,300</td><td>25,522</td><td>21.11</td><td style="color:#16a34a;font-weight:800">34.0x</td><td><div class="bar-wrap"><div class="bar-fill" style="width:53%;background:#7c5cd8"></div></div></td></tr>
+        <tr><td><span class="tag t-social">Social Media</span></td><td>31,742</td><td>30,644</td><td>15.79</td><td style="color:#3b82d4;font-weight:800">16.2x</td><td><div class="bar-wrap"><div class="bar-fill" style="width:25%;background:#16a34a"></div></div></td></tr>
+        <tr><td><span class="tag t-webinar">Webinar 1st</span></td><td>9,642</td><td>204,858</td><td>29.60</td><td style="color:#3b82d4;font-weight:800">15.0x</td><td><div class="bar-wrap"><div class="bar-fill" style="width:23%;background:#0891b2"></div></div></td></tr>
+        <tr><td><span class="tag t-webinar">Webinar 3rd</span></td><td>5,788</td><td>253,790</td><td>12.07</td><td style="color:#f59e0b;font-weight:700">8.2x</td><td><div class="bar-wrap"><div class="bar-fill" style="width:13%;background:#f59e0b"></div></div></td></tr>
+        <tr><td><span class="tag t-event">In-Person 1st</span></td><td>12,524</td><td>1,015,873</td><td>123.50</td><td style="color:#f59e0b;font-weight:700">9.7x</td><td><div class="bar-wrap"><div class="bar-fill" style="width:15%;background:#ea580c"></div></div></td></tr>
+        <tr><td><span class="tag t-event">In-Person 3rd</span></td><td>7,796</td><td>752,295</td><td>39.35</td><td style="color:#e11d48;font-weight:700">6.7x</td><td><div class="bar-wrap"><div class="bar-fill" style="width:10%;background:#e11d48"></div></div></td></tr>
+      </table>
+      <div style="margin-top:8px;font-size:9px;color:#57606a">⚡ Email = ROI champion (63.9x) | 🏆 In-Person 1st = Deal value champion (Rp 123.5B)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><h3>Industri — Conversion Rate (Deal Won %)</h3><span style="font-size:9px;color:#57606a">Deal Won / Total Leads</span></div>
+    <div class="cb scroll-x">
+      <table>
+        <tr><th>#</th><th>Industri</th><th>Leads</th><th>Deal Won</th><th>Rate</th><th>Bar</th></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">1</td><td>Minyak &amp; Gas</td><td>7,638</td><td>163</td><td style="color:#16a34a;font-weight:800">2.1%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#16a34a"></div></div></td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">2</td><td>Telekomunikasi</td><td>13,886</td><td>261</td><td style="color:#3b82d4;font-weight:700">1.9%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:90%;background:#3b82d4"></div></div></td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">3</td><td>Teknologi / IT</td><td>15,529</td><td>283</td><td style="color:#3b82d4;font-weight:700">1.8%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:87%;background:#3b82d4"></div></div></td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">4</td><td>Kesehatan</td><td>11,034</td><td>198</td><td style="color:#3b82d4;font-weight:700">1.8%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:86%;background:#7c5cd8"></div></div></td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">5</td><td>Manufaktur</td><td>17,135</td><td>302</td><td style="color:#3b82d4;font-weight:700">1.8%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:85%;background:#7c5cd8"></div></div></td></tr>
+        <tr><td>6</td><td>Perbankan &amp; Keu.</td><td>18,754</td><td>301</td><td>1.6%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:76%;background:#0891b2"></div></div></td></tr>
+        <tr><td>7</td><td>Ritel &amp; Consumer</td><td>15,526</td><td>258</td><td>1.7%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:80%;background:#0891b2"></div></div></td></tr>
+        <tr><td>8</td><td>Asuransi</td><td>9,269</td><td>139</td><td style="color:#e11d48;font-weight:700">1.5%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:72%;background:#e11d48"></div></div></td></tr>
       </table>
     </div>
   </div>
 </div>
 
-<!-- ======================== TAB: SEASONAL ======================== -->
-<div id="tab-seasonal" class="tab-content">
-  <div class="section-title">Tren Bulanan — Leads, Investment & Deal/Win</div>
-  <div class="card" style="margin-bottom:16px">
-    <div class="card-header"><h3>Monthly Leads Volume — 2024 vs 2025</h3><span class="badge">Seasonal Pattern</span></div>
-    <div class="chart-box"><div id="chart-monthly-leads" style="height:300px"></div></div>
-  </div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header"><h3>Monthly Deal/Win (Rp Billion)</h3></div>
-      <div class="chart-box"><div id="chart-monthly-deal" style="height:280px"></div></div>
-    </div>
-    <div class="card">
-      <div class="card-header"><h3>Monthly Investment (Rp Billion)</h3></div>
-      <div class="chart-box"><div id="chart-monthly-invest" style="height:280px"></div></div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header"><h3>Seasonal Pattern Highlights</h3></div>
-    <div class="card-body">
-      <div class="insight-grid">
-        <div class="insight-box green">🌿 <b>Q1 (Jan–Mar):</b> Strong deal values, especially Sep-Mar momentum carry. Leads moderate tapi deal value tinggi di awal tahun. Cocok untuk campaign bernilai tinggi.</div>
-        <div class="insight-box yellow">☀️ <b>Q2 (Apr–Jun):</b> Lead volume meningkat (terutama April 2025: 8,306). Deal value naik di Juni terutama tahun 2024 (Rp 14.96B). Ini window penting untuk event fisik.</div>
-        <div class="insight-box">📦 <b>Q3 (Jul–Sep):</b> Peak leads di 2024 September (9,393) dan Juli (9,042). September jadi bulan puncak untuk deal di 2024. Identik dengan conference musim gugur.</div>
-        <div class="insight-box red">❄️ <b>Q4 (Okt–Des):</b> Oktober mulai turun di leads, tapi Desember selalu rebound (2024: 10,274 leads, deal Rp 13.23B; 2025: Rp 14.4B). End-of-year push penting.</div>
-      </div>
+<!-- Seasonal SVG chart -->
+<div class="card">
+  <div class="ch"><h3>📅 Tren Musiman — Monthly Lead Volume (2024 vs 2025)</h3><span style="font-size:9px;color:#3b82d4;font-weight:600">Seasonal Pattern Detected</span></div>
+  <div style="padding:10px 14px 14px">
+    <svg viewBox="0 0 900 160" width="100%" style="display:block">
+      <line x1="50" y1="10" x2="50" y2="130" stroke="#e5e7eb" stroke-width="1"/>
+      <line x1="50" y1="130" x2="880" y2="130" stroke="#e5e7eb" stroke-width="1"/>
+      <line x1="50" y1="70" x2="880" y2="70" stroke="#f0f2f5" stroke-width="1" stroke-dasharray="4"/>
+      <line x1="50" y1="40" x2="880" y2="40" stroke="#f0f2f5" stroke-width="1" stroke-dasharray="4"/>
+      <text x="40" y="133" text-anchor="end" font-size="8" fill="#9ca3af">0</text>
+      <text x="40" y="73" text-anchor="end" font-size="8" fill="#9ca3af">5K</text>
+      <text x="40" y="43" text-anchor="end" font-size="8" fill="#9ca3af">7.5K</text>
+      <text x="40" y="14" text-anchor="end" font-size="8" fill="#9ca3af">10K</text>
+      <text x="71"  y="143" text-anchor="middle" font-size="8" fill="#57606a">Jan</text>
+      <text x="138" y="143" text-anchor="middle" font-size="8" fill="#57606a">Feb</text>
+      <text x="205" y="143" text-anchor="middle" font-size="8" fill="#57606a">Mar</text>
+      <text x="272" y="143" text-anchor="middle" font-size="8" fill="#57606a">Apr</text>
+      <text x="339" y="143" text-anchor="middle" font-size="8" fill="#57606a">Mei</text>
+      <text x="406" y="143" text-anchor="middle" font-size="8" fill="#57606a">Jun</text>
+      <text x="473" y="143" text-anchor="middle" font-size="8" fill="#57606a">Jul</text>
+      <text x="540" y="143" text-anchor="middle" font-size="8" fill="#57606a">Agt</text>
+      <text x="607" y="143" text-anchor="middle" font-size="8" fill="#57606a">Sep</text>
+      <text x="674" y="143" text-anchor="middle" font-size="8" fill="#57606a">Okt</text>
+      <text x="741" y="143" text-anchor="middle" font-size="8" fill="#57606a">Nov</text>
+      <text x="808" y="143" text-anchor="middle" font-size="8" fill="#57606a">Des</text>
+      <polyline points="71,67.3 138,63.7 205,70.1 272,52.1 339,60.9 406,60.3 473,26.7 540,48.8 607,22.7 674,46.6 741,56.5 808,12.9" fill="none" stroke="#3b82d4" stroke-width="2.5" stroke-linejoin="round"/>
+      <circle cx="607" cy="22.7" r="4" fill="#3b82d4"/><text x="607" y="17" text-anchor="middle" font-size="7" fill="#3b82d4" font-weight="700">9,393</text>
+      <circle cx="808" cy="12.9" r="4" fill="#3b82d4"/><text x="808" y="8" text-anchor="middle" font-size="7" fill="#3b82d4" font-weight="700">10,274</text>
+      <polyline points="71,51.6 138,54.5 205,51.3 272,35.2 339,72.9 406,50.9 473,39.3 540,67.6 607,52.5 674,66.7 741,44 808,69.4" fill="none" stroke="#e11d48" stroke-width="2" stroke-dasharray="6 3" stroke-linejoin="round"/>
+      <circle cx="272" cy="35.2" r="4" fill="#e11d48"/><text x="272" y="30" text-anchor="middle" font-size="7" fill="#e11d48" font-weight="700">8,306</text>
+      <line x1="660" y1="155" x2="690" y2="155" stroke="#3b82d4" stroke-width="2.5"/>
+      <text x="695" y="158" font-size="9" fill="#1f2328">2024</text>
+      <line x1="720" y1="155" x2="750" y2="155" stroke="#e11d48" stroke-width="2" stroke-dasharray="5 3"/>
+      <text x="755" y="158" font-size="9" fill="#1f2328">2025</text>
+    </svg>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:8px">
+      <div style="background:#f0fdf4;border-left:3px solid #16a34a;padding:6px 8px;border-radius:4px;font-size:10px;color:#14532d"><b>Q1 Jan–Mar:</b> Deal tinggi, leads moderat. Window campaign premium.</div>
+      <div style="background:#fffbeb;border-left:3px solid #f59e0b;padding:6px 8px;border-radius:4px;font-size:10px;color:#78350f"><b>Q2 Apr–Jun:</b> Lead volume melonjak. Juni 2024 deal Rp 14.96B — event fisik prime time.</div>
+      <div style="background:#eff6ff;border-left:3px solid #3b82d4;padding:6px 8px;border-radius:4px;font-size:10px;color:#1e3a5f"><b>Q3 Jul–Sep:</b> Peak 2024: Sep 9,393 leads, deal Rp 18.38B. Conference season.</div>
+      <div style="background:#fdf4ff;border-left:3px solid #7c5cd8;padding:6px 8px;border-radius:4px;font-size:10px;color:#4c1d95"><b>Q4 Okt–Des:</b> Desember rebound kuat — 10,274 leads 2024. End-year closing push.</div>
     </div>
   </div>
 </div>
 
-<!-- ======================== TAB: YoY ======================== -->
-<div id="tab-yoy" class="tab-content">
-  <div class="section-title">Year-over-Year Comparison: 2024 vs 2025</div>
+<div class="grid2">
+  <div class="card">
+    <div class="ch"><h3>🔁 Year-over-Year: 2024 vs 2025</h3></div>
+    <div class="cb">
+      <div class="yoy-row hdr"><div>Metrik</div><div class="rv">2024</div><div class="rv">2025</div><div class="rv">Δ</div></div>
+      <div class="yoy-row"><div>Campaigns</div><div class="rv">140</div><div class="rv">133</div><div class="rv down">▼ 5%</div></div>
+      <div class="yoy-row"><div>Total Leads</div><div class="rv">85,092</div><div class="rv">79,476</div><div class="rv down">▼ 6.6%</div></div>
+      <div class="yoy-row"><div>Investment (Rp B)</div><div class="rv">12.23</div><div class="rv">11.79</div><div class="rv down">▼ 3.6%</div></div>
+      <div class="yoy-row"><div>Deal/Win (Rp B)</div><div class="rv">133.02</div><div class="rv">133.36</div><div class="rv up">▲ +0.3%</div></div>
+      <div class="yoy-row"><div>Overall ROI</div><div class="rv">10.88x</div><div class="rv">11.31x</div><div class="rv up">▲ +3.9%</div></div>
+      <div class="yoy-row"><div>Opportunity (Rp B)</div><div class="rv">579.01</div><div class="rv">578.71</div><div class="rv flat">≈ flat</div></div>
+      <hr style="border:none;border-top:1px solid #f0f2f5;margin:8px 0"/>
+      <div style="font-size:11px;margin-top:4px"><b>Event Channel:</b></div>
+      <div class="yoy-row"><div style="padding-left:8px">Leads</div><div class="rv">17,355</div><div class="rv">18,395</div><div class="rv up">▲ +6%</div></div>
+      <div class="yoy-row"><div style="padding-left:8px">Deal (Rp B)</div><div class="rv">99.73</div><div class="rv">104.79</div><div class="rv up">▲ +5.1%</div></div>
+      <div class="yoy-row"><div style="padding-left:8px">ROI</div><div class="rv">8.89x</div><div class="rv">9.69x</div><div class="rv up">▲ +9%</div></div>
+      <div style="font-size:11px;margin-top:6px"><b>Digital Marketing:</b></div>
+      <div class="yoy-row"><div style="padding-left:8px">Leads</div><div class="rv">67,737</div><div class="rv">61,081</div><div class="rv down">▼ 9.8%</div></div>
+      <div class="yoy-row"><div style="padding-left:8px">Deal (Rp B)</div><div class="rv">33.30</div><div class="rv">28.57</div><div class="rv down">▼ 14.2%</div></div>
+      <div class="yoy-row"><div style="padding-left:8px">ROI</div><div class="rv">33.07x</div><div class="rv">29.26x</div><div class="rv down">▼ 11.5%</div></div>
+    </div>
+  </div>
 
-  <!-- Summary YoY KPIs -->
+  <div class="card">
+    <div class="ch"><h3>🏆 Top 5 Campaigns — Deal Value Tertinggi</h3></div>
+    <div class="cb">
+      <table>
+        <tr><th>#</th><th>Campaign</th><th>Leads</th><th>ROI</th><th>Deal</th></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">1</td><td style="font-size:10px">CX Day 2024 - Yogyakarta (Sep)</td><td>447</td><td>22.3x</td><td style="font-weight:800;color:#16a34a">Rp 6.67B</td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">2</td><td style="font-size:10px">Tech Day 2025 - Medan (Mei)</td><td>411</td><td>24.5x</td><td style="font-weight:800;color:#16a34a">Rp 6.18B</td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">3</td><td style="font-size:10px">Innovation Summit 2024 - Yogyakarta</td><td>228</td><td>17.5x</td><td style="font-weight:800;color:#3b82d4">Rp 5.27B</td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">4</td><td style="font-size:10px">AI Roadshow 2025 - Jakarta (Agt)</td><td>424</td><td>25.6x</td><td style="font-weight:800;color:#3b82d4">Rp 5.22B</td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">5</td><td style="font-size:10px">AI Roadshow 2024 - Makassar (Sep)</td><td>372</td><td>19.9x</td><td style="font-weight:800;color:#3b82d4">Rp 4.91B</td></tr>
+      </table>
+      <hr style="border:none;border-top:1px solid #f0f2f5;margin:8px 0"/>
+      <div style="font-size:10px;font-weight:700;margin-bottom:6px">🥇 Top 3 Email Campaign (ROI)</div>
+      <table>
+        <tr><th>Campaign</th><th>Leads</th><th>CPL</th><th>ROI</th></tr>
+        <tr><td style="font-size:10px">Email - Event Invitation (Jan'24)</td><td>2,972</td><td>Rp 3,176</td><td style="color:#16a34a;font-weight:800">156x</td></tr>
+        <tr><td style="font-size:10px">Email - Newsletter Bulanan (Jun'24)</td><td>2,586</td><td>Rp 4,526</td><td style="color:#16a34a;font-weight:800">150x</td></tr>
+        <tr><td style="font-size:10px">Email - Lead Nurturing (Jul'25)</td><td>2,660</td><td>Rp 4,520</td><td style="color:#16a34a;font-weight:800">134x</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="ig">
+  <div class="ibox g">✅ <b>Email = ROI Champion (63.9x avg, 156x peak):</b> CPL hanya Rp 5,367 — paling hemat dari semua channel. Rekomendasi: naikkan budget email 20–30% untuk 2026.</div>
+  <div class="ibox b">🎯 <b>In-Person First-Party = Revenue Engine (Rp 123.5B deal):</b> ROI 9.71x tapi deal value absolut terbesar. Fokus di kota Tier-1: Yogyakarta, Jakarta, Medan.</div>
+  <div class="ibox y">⚠️ <b>In-Person Third-Party Sponsorship Tidak Efisien (ROI 6.71x):</b> CPL Rp 752K. Kurangi sponsorship eksternal, alihkan ke event sendiri.</div>
+  <div class="ibox b">📈 <b>2025 Lebih Efisien:</b> Spend turun 3.6%, deal hampir sama (Rp 133.4B). ROI naik dari 10.88x → 11.31x. Event channel tumbuh +9% ROI. Pertahankan strategi ini.</div>
+  <div class="ibox g">🏭 <b>Minyak &amp; Gas + Telekomunikasi = Best Converting Industries</b> (2.1% dan 1.9% deal rate). Buat campaign vertikal khusus dengan konten case study industri-specific.</div>
+  <div class="ibox y">📅 <b>September = Peak Month:</b> Leads 9,393 dan deal Rp 18.38B di Sep'24. Desember selalu rebound. Alokasikan budget terbesar di Q3 (Jul–Sep) dan Q4 closing push.</div>
+</div>
+
+</div><!-- /body overview -->
+</div><!-- /tab-overview -->
+
+<!-- ════════════════ TAB: ROI & EFISIENSI ════════════════ -->
+<div id="tab-roi" class="tab-pane">
+<div class="body">
+  <div class="stitle">Top Campaigns — ROI Tertinggi</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ch"><h3>Top 10 Campaign — ROI Tertinggi</h3><span style="font-size:9px;color:#57606a">Email dominates</span></div>
+      <div class="cb scroll-x">
+        <table>
+          <tr><th>#</th><th>Campaign</th><th>Channel</th><th>Leads</th><th>CPL</th><th>Deal (B)</th><th>ROI</th></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">1</td><td style="font-size:10px">Email - Event Invitation (Jan 2024)</td><td><span class="tag t-email">Email</span></td><td>2,972</td><td>3,176</td><td>1.47</td><td style="color:#16a34a;font-weight:800">156x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">2</td><td style="font-size:10px">Email - Newsletter Bulanan (Jun 2024)</td><td><span class="tag t-email">Email</span></td><td>2,586</td><td>4,526</td><td>1.76</td><td style="color:#16a34a;font-weight:800">150x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">3</td><td style="font-size:10px">Email - Lead Nurturing (Jul 2025)</td><td><span class="tag t-email">Email</span></td><td>2,660</td><td>4,520</td><td>1.62</td><td style="color:#16a34a;font-weight:800">134x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">4</td><td style="font-size:10px">Email - Case Study (Nov 2025)</td><td><span class="tag t-email">Email</span></td><td>2,212</td><td>4,143</td><td>1.23</td><td style="color:#16a34a;font-weight:800">134x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">5</td><td style="font-size:10px">Email - Case Study (Okt 2024)</td><td><span class="tag t-email">Email</span></td><td>2,983</td><td>2,945</td><td>1.09</td><td style="color:#3b82d4;font-weight:700">124x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">6</td><td style="font-size:10px">Email - Lead Nurturing (Mei 2024)</td><td><span class="tag t-email">Email</span></td><td>1,762</td><td>6,310</td><td>1.28</td><td style="color:#3b82d4;font-weight:700">115x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">7</td><td style="font-size:10px">Email - Product Update (Feb 2024)</td><td><span class="tag t-email">Email</span></td><td>2,544</td><td>4,575</td><td>1.33</td><td style="color:#3b82d4;font-weight:700">114x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">8</td><td style="font-size:10px">Email - Event Invitation (Apr 2025)</td><td><span class="tag t-email">Email</span></td><td>2,858</td><td>4,269</td><td>1.31</td><td style="color:#3b82d4;font-weight:700">107x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">9</td><td style="font-size:10px">Email - Newsletter (Apr 2025)</td><td><span class="tag t-email">Email</span></td><td>2,824</td><td>2,275</td><td>0.69</td><td style="color:#3b82d4;font-weight:700">107x</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">10</td><td style="font-size:10px">Website - Free Trial (Sep 2025)</td><td><span class="tag t-web">Website</span></td><td>999</td><td>10,813</td><td>1.12</td><td style="color:#3b82d4;font-weight:700">103x</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><h3>Top 10 Campaign — Deal/Win Terbesar</h3></div>
+      <div class="cb scroll-x">
+        <table>
+          <tr><th>#</th><th>Campaign</th><th>Leads</th><th>ROI</th><th>Deal (B)</th></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">1</td><td style="font-size:10px">CX Day 2024 - Yogyakarta (Sep)</td><td>447</td><td>22.3x</td><td style="color:#16a34a;font-weight:800">6.67</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">2</td><td style="font-size:10px">Tech Day 2025 - Medan (Mei)</td><td>411</td><td>24.5x</td><td style="color:#16a34a;font-weight:800">6.18</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">3</td><td style="font-size:10px">Innovation Summit 2024 - Yogyakarta</td><td>228</td><td>17.5x</td><td style="color:#3b82d4;font-weight:700">5.27</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">4</td><td style="font-size:10px">AI Roadshow 2025 - Jakarta (Agt)</td><td>424</td><td>25.6x</td><td style="color:#3b82d4;font-weight:700">5.22</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">5</td><td style="font-size:10px">AI Roadshow 2024 - Makassar (Sep)</td><td>372</td><td>19.9x</td><td style="color:#3b82d4;font-weight:700">4.91</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">6</td><td style="font-size:10px">Innovation Summit 2025 - Yogyakarta</td><td>449</td><td>15.1x</td><td>4.57</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">7</td><td style="font-size:10px">AI Roadshow 2024 - Jakarta (Des)</td><td>318</td><td>10.4x</td><td>4.44</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">8</td><td style="font-size:10px">AI Roadshow 2025 - Yogyakarta (Jun)</td><td>418</td><td>12.7x</td><td>4.32</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">9</td><td style="font-size:10px">CX Day 2025 - Bandung (Jul)</td><td>409</td><td>10.5x</td><td>4.26</td></tr>
+          <tr><td style="color:#3b82d4;font-weight:700">10</td><td style="font-size:10px">Tech Day 2024 - Bali (Jun)</td><td>310</td><td>13.3x</td><td>4.21</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><h3>Cost Per Lead (CPL) per Channel</h3><span style="font-size:9px;color:#57606a">Lower = Better</span></div>
+    <div class="cb scroll-x">
+      <table>
+        <tr><th>Channel</th><th>CPL (Rp)</th><th>Leads</th><th>ROI</th><th>Efisiensi</th></tr>
+        <tr><td><span class="tag t-email">Email</span></td><td style="color:#16a34a;font-weight:800">5,367</td><td>72,776</td><td>63.9x</td><td><div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#16a34a"></div></div></td></tr>
+        <tr><td><span class="tag t-web">Website</span></td><td style="color:#3b82d4;font-weight:700">25,522</td><td>24,300</td><td>34.0x</td><td><div class="bar-wrap"><div class="bar-fill" style="width:80%;background:#3b82d4"></div></div></td></tr>
+        <tr><td><span class="tag t-social">Social Media</span></td><td style="color:#f59e0b;font-weight:700">30,644</td><td>31,742</td><td>16.2x</td><td><div class="bar-wrap"><div class="bar-fill" style="width:75%;background:#f59e0b"></div></div></td></tr>
+        <tr><td><span class="tag t-webinar">Webinar 1st</span></td><td style="color:#f59e0b;font-weight:700">204,858</td><td>9,642</td><td>15.0x</td><td><div class="bar-wrap"><div class="bar-fill" style="width:40%;background:#0891b2"></div></div></td></tr>
+        <tr><td><span class="tag t-webinar">Webinar 3rd</span></td><td style="color:#e11d48;font-weight:700">253,790</td><td>5,788</td><td>8.2x</td><td><div class="bar-wrap"><div class="bar-fill" style="width:30%;background:#e11d48"></div></div></td></tr>
+        <tr><td><span class="tag t-event">In-Person 3rd</span></td><td style="color:#e11d48;font-weight:800">752,295</td><td>7,796</td><td>6.7x</td><td><div class="bar-wrap"><div class="bar-fill" style="width:15%;background:#e11d48"></div></div></td></tr>
+        <tr><td><span class="tag t-event">In-Person 1st</span></td><td style="color:#e11d48;font-weight:800">1,015,873</td><td>12,524</td><td>9.7x</td><td><div class="bar-wrap"><div class="bar-fill" style="width:5%;background:#dc2626"></div></div></td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ TAB: INDUSTRI ════════════════ -->
+<div id="tab-industry" class="tab-pane">
+<div class="body">
+  <div class="stitle">Conversion Rate per Industri (Deal Won / Total Leads)</div>
+  <div class="card">
+    <div class="ch"><h3>Detail Industri — Lead, Opportunity &amp; Deal Won</h3><span style="font-size:9px;color:#57606a">14 Industri</span></div>
+    <div class="cb scroll-x">
+      <table>
+        <tr><th>#</th><th>Industri</th><th>Total Leads</th><th>Opportunity</th><th>Deal Won</th><th>Deal Rate</th><th>Opp Rate</th><th>Bar</th></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">1</td><td>Minyak &amp; Gas</td><td>7,638</td><td>371</td><td>163</td><td style="color:#16a34a;font-weight:800">2.1%</td><td>4.9%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#16a34a"></div></div></td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">2</td><td>Telekomunikasi</td><td>13,886</td><td>709</td><td>261</td><td style="color:#3b82d4;font-weight:700">1.9%</td><td>5.1%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:90%;background:#3b82d4"></div></div></td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">3</td><td>Teknologi / IT Services</td><td>15,529</td><td>788</td><td>283</td><td style="color:#3b82d4;font-weight:700">1.8%</td><td>5.1%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:87%;background:#3b82d4"></div></div></td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">4</td><td>Kesehatan</td><td>11,034</td><td>529</td><td>198</td><td style="color:#3b82d4;font-weight:700">1.8%</td><td>4.8%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:86%;background:#7c5cd8"></div></div></td></tr>
+        <tr><td style="color:#3b82d4;font-weight:700">5</td><td>Manufaktur</td><td>17,135</td><td>819</td><td>302</td><td style="color:#3b82d4;font-weight:700">1.8%</td><td>4.8%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:86%;background:#7c5cd8"></div></div></td></tr>
+        <tr><td>6</td><td>Pemerintahan / Sektor Publik</td><td>12,199</td><td>629</td><td>208</td><td>1.7%</td><td>5.2%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:82%;background:#0891b2"></div></div></td></tr>
+        <tr><td>7</td><td>Energi &amp; Utilitas</td><td>9,276</td><td>432</td><td>157</td><td>1.7%</td><td>4.7%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:80%;background:#0891b2"></div></div></td></tr>
+        <tr><td>8</td><td>Ritel &amp; Consumer Goods</td><td>15,526</td><td>793</td><td>258</td><td>1.7%</td><td>5.1%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:80%;background:#0891b2"></div></div></td></tr>
+        <tr><td>9</td><td>Logistik &amp; Transportasi</td><td>9,534</td><td>473</td><td>156</td><td>1.6%</td><td>5.0%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:78%;background:#f59e0b"></div></div></td></tr>
+        <tr><td>10</td><td>Pendidikan</td><td>7,864</td><td>405</td><td>127</td><td>1.6%</td><td>5.2%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:77%;background:#f59e0b"></div></div></td></tr>
+        <tr><td>11</td><td>Perbankan &amp; Jasa Keuangan</td><td>18,754</td><td>958</td><td>301</td><td>1.6%</td><td>5.1%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:76%;background:#f59e0b"></div></div></td></tr>
+        <tr><td>12</td><td>Otomotif</td><td>9,265</td><td>463</td><td>147</td><td>1.6%</td><td>5.0%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:75%;background:#e11d48"></div></div></td></tr>
+        <tr><td>13</td><td>Media &amp; Hiburan</td><td>7,659</td><td>447</td><td>121</td><td>1.6%</td><td>5.8%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:75%;background:#e11d48"></div></div></td></tr>
+        <tr><td>14</td><td>Asuransi</td><td>9,269</td><td>484</td><td>139</td><td style="color:#e11d48;font-weight:700">1.5%</td><td>5.2%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:72%;background:#e11d48"></div></div></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="ig">
+    <div class="ibox g">🏆 <b>Minyak &amp; Gas = Best Converter (2.1%):</b> Tertinggi dari 14 industri. Buat campaign vertikal O&amp;G dengan case study spesifik.</div>
+    <div class="ibox b">📡 <b>Telekomunikasi (1.9%) &amp; IT Services (1.8%):</b> Industri tech-forward cocok untuk solusi IBM. Prioritaskan konten digital transformation.</div>
+    <div class="ibox y">📊 <b>Media &amp; Hiburan — Opp Rate Tertinggi (5.8%):</b> Gap besar antara Opportunity dan Deal Won. Perlu nurturing lebih intensif.</div>
+    <div class="ibox r">⚠️ <b>Asuransi = Lowest Deal Rate (1.5%):</b> Sales cycle panjang — pertimbangkan nurturing sequence yang lebih panjang dan spesifik.</div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ TAB: TREN MUSIMAN ════════════════ -->
+<div id="tab-seasonal" class="tab-pane">
+<div class="body">
+  <div class="card">
+    <div class="ch"><h3>Monthly Lead Volume — 2024 vs 2025</h3><span style="font-size:9px;color:#3b82d4;font-weight:600">Seasonal Pattern Detected</span></div>
+    <div style="padding:10px 14px 14px">
+      <svg viewBox="0 0 900 160" width="100%" style="display:block">
+        <line x1="50" y1="10" x2="50" y2="130" stroke="#e5e7eb" stroke-width="1"/>
+        <line x1="50" y1="130" x2="880" y2="130" stroke="#e5e7eb" stroke-width="1"/>
+        <line x1="50" y1="70" x2="880" y2="70" stroke="#f0f2f5" stroke-width="1" stroke-dasharray="4"/>
+        <line x1="50" y1="40" x2="880" y2="40" stroke="#f0f2f5" stroke-width="1" stroke-dasharray="4"/>
+        <text x="40" y="133" text-anchor="end" font-size="8" fill="#9ca3af">0</text>
+        <text x="40" y="73" text-anchor="end" font-size="8" fill="#9ca3af">5K</text>
+        <text x="40" y="43" text-anchor="end" font-size="8" fill="#9ca3af">7.5K</text>
+        <text x="40" y="14" text-anchor="end" font-size="8" fill="#9ca3af">10K</text>
+        <text x="71"  y="143" text-anchor="middle" font-size="8" fill="#57606a">Jan</text>
+        <text x="138" y="143" text-anchor="middle" font-size="8" fill="#57606a">Feb</text>
+        <text x="205" y="143" text-anchor="middle" font-size="8" fill="#57606a">Mar</text>
+        <text x="272" y="143" text-anchor="middle" font-size="8" fill="#57606a">Apr</text>
+        <text x="339" y="143" text-anchor="middle" font-size="8" fill="#57606a">Mei</text>
+        <text x="406" y="143" text-anchor="middle" font-size="8" fill="#57606a">Jun</text>
+        <text x="473" y="143" text-anchor="middle" font-size="8" fill="#57606a">Jul</text>
+        <text x="540" y="143" text-anchor="middle" font-size="8" fill="#57606a">Agt</text>
+        <text x="607" y="143" text-anchor="middle" font-size="8" fill="#57606a">Sep</text>
+        <text x="674" y="143" text-anchor="middle" font-size="8" fill="#57606a">Okt</text>
+        <text x="741" y="143" text-anchor="middle" font-size="8" fill="#57606a">Nov</text>
+        <text x="808" y="143" text-anchor="middle" font-size="8" fill="#57606a">Des</text>
+        <polyline points="71,67.3 138,63.7 205,70.1 272,52.1 339,60.9 406,60.3 473,26.7 540,48.8 607,22.7 674,46.6 741,56.5 808,12.9" fill="none" stroke="#3b82d4" stroke-width="2.5" stroke-linejoin="round"/>
+        <circle cx="607" cy="22.7" r="4" fill="#3b82d4"/><text x="607" y="17" text-anchor="middle" font-size="7" fill="#3b82d4" font-weight="700">9,393</text>
+        <circle cx="808" cy="12.9" r="4" fill="#3b82d4"/><text x="808" y="8" text-anchor="middle" font-size="7" fill="#3b82d4" font-weight="700">10,274</text>
+        <polyline points="71,51.6 138,54.5 205,51.3 272,35.2 339,72.9 406,50.9 473,39.3 540,67.6 607,52.5 674,66.7 741,44 808,69.4" fill="none" stroke="#e11d48" stroke-width="2" stroke-dasharray="6 3" stroke-linejoin="round"/>
+        <circle cx="272" cy="35.2" r="4" fill="#e11d48"/><text x="272" y="30" text-anchor="middle" font-size="7" fill="#e11d48" font-weight="700">8,306</text>
+        <line x1="660" y1="155" x2="690" y2="155" stroke="#3b82d4" stroke-width="2.5"/>
+        <text x="695" y="158" font-size="9" fill="#1f2328">2024</text>
+        <line x1="720" y1="155" x2="750" y2="155" stroke="#e11d48" stroke-width="2" stroke-dasharray="5 3"/>
+        <text x="755" y="158" font-size="9" fill="#1f2328">2025</text>
+      </svg>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:8px">
+        <div style="background:#f0fdf4;border-left:3px solid #16a34a;padding:6px 8px;border-radius:4px;font-size:10px;color:#14532d"><b>Q1 Jan–Mar:</b> Deal tinggi, leads moderat. Window campaign premium.</div>
+        <div style="background:#fffbeb;border-left:3px solid #f59e0b;padding:6px 8px;border-radius:4px;font-size:10px;color:#78350f"><b>Q2 Apr–Jun:</b> Lead volume melonjak. Juni 2024 deal Rp 14.96B — event fisik prime time.</div>
+        <div style="background:#eff6ff;border-left:3px solid #3b82d4;padding:6px 8px;border-radius:4px;font-size:10px;color:#1e3a5f"><b>Q3 Jul–Sep:</b> Peak 2024: Sep 9,393 leads, deal Rp 18.38B. Conference season.</div>
+        <div style="background:#fdf4ff;border-left:3px solid #7c5cd8;padding:6px 8px;border-radius:4px;font-size:10px;color:#4c1d95"><b>Q4 Okt–Des:</b> Desember rebound kuat — 10,274 leads 2024. End-year closing push.</div>
+      </div>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ch"><h3>Monthly Deal/Win (Rp B)</h3></div>
+      <div class="cb scroll-x">
+        <table>
+          <tr><th>Bulan</th><th>2024</th><th>2025</th><th>Δ</th></tr>
+          <tr><td>Januari</td><td>8.35</td><td>14.25</td><td style="color:#16a34a">▲ +70.7%</td></tr>
+          <tr><td>Februari</td><td>7.83</td><td>12.83</td><td style="color:#16a34a">▲ +63.9%</td></tr>
+          <tr><td>Maret</td><td>14.05</td><td>10.13</td><td style="color:#dc2626">▼ −27.9%</td></tr>
+          <tr><td>April</td><td>8.72</td><td>7.25</td><td style="color:#dc2626">▼ −16.9%</td></tr>
+          <tr><td>Mei</td><td>8.89</td><td>10.77</td><td style="color:#16a34a">▲ +21.2%</td></tr>
+          <tr><td>Juni</td><td>14.96</td><td>9.19</td><td style="color:#dc2626">▼ −38.6%</td></tr>
+          <tr><td>Juli</td><td>8.94</td><td>10.30</td><td style="color:#16a34a">▲ +15.2%</td></tr>
+          <tr><td>Agustus</td><td>12.22</td><td>12.54</td><td style="color:#16a34a">▲ +2.6%</td></tr>
+          <tr><td>September</td><td style="font-weight:800;color:#1d3557">18.38</td><td>10.87</td><td style="color:#dc2626">▼ −40.8%</td></tr>
+          <tr><td>Oktober</td><td>11.20</td><td>8.78</td><td style="color:#dc2626">▼ −21.6%</td></tr>
+          <tr><td>November</td><td>6.27</td><td>12.05</td><td style="color:#16a34a">▲ +92.2%</td></tr>
+          <tr><td>Desember</td><td>13.23</td><td style="font-weight:800;color:#1d3557">14.40</td><td style="color:#16a34a">▲ +8.8%</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><h3>Seasonal Highlights per Kuartal</h3></div>
+      <div class="cb">
+        <div class="ibox g" style="margin-bottom:8px">🌿 <b>Q1 (Jan–Mar):</b> 2025 jauh lebih kuat di Q1 (+67% avg). Cocok untuk campaign bernilai tinggi di awal tahun.</div>
+        <div class="ibox y" style="margin-bottom:8px">☀️ <b>Q2 (Apr–Jun):</b> April 2025 leads tertinggi (8,306). Juni 2024 deal Rp 14.96B. Q2 window penting untuk launch event fisik.</div>
+        <div class="ibox b" style="margin-bottom:8px">📦 <b>Q3 (Jul–Sep):</b> Sep 2024 = peak deal Rp 18.38B dan leads 9,393. Conference season — alokasikan budget event terbesar di sini.</div>
+        <div class="ibox r">❄️ <b>Q4 (Okt–Des):</b> Nov 2025 rebound kuat (+92%). Desember konsisten tinggi. End-year closing push sangat efektif.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ TAB: YoY ════════════════ -->
+<div id="tab-yoy" class="tab-pane">
+<div class="body">
   <div class="kpi-row">
-    <div class="kpi-card" style="--accent:#3b82d4">
-      <div class="label">Campaigns</div>
-      <div class="value">140 → 133</div>
-      <div class="sub">2024 → 2025</div>
-      <div class="delta down">▼ 5% fewer campaigns</div>
-    </div>
-    <div class="kpi-card" style="--accent:#7c5cd8">
-      <div class="label">Total Leads</div>
-      <div class="value">85,092 → 79,476</div>
-      <div class="sub">2024 → 2025</div>
-      <div class="delta down">▼ 6.6% lead volume</div>
-    </div>
-    <div class="kpi-card" style="--accent:#0891b2">
-      <div class="label">Investment</div>
-      <div class="value">12.23B → 11.79B</div>
-      <div class="sub">IDR Billion</div>
-      <div class="delta down">▼ 3.6% spend</div>
-    </div>
-    <div class="kpi-card" style="--accent:#16a34a">
-      <div class="label">Deal/Win</div>
-      <div class="value">133.02B → 133.36B</div>
-      <div class="sub">IDR Billion</div>
-      <div class="delta up">▲ 0.3% revenue stable</div>
-    </div>
-    <div class="kpi-card" style="--accent:#f59e0b">
-      <div class="label">Overall ROI</div>
-      <div class="value">10.88x → 11.31x</div>
-      <div class="sub">Deal / Investment</div>
-      <div class="delta up">▲ +3.9% efficiency</div>
-    </div>
-    <div class="kpi-card" style="--accent:#e11d48">
-      <div class="label">Opportunity</div>
-      <div class="value">579B → 578.7B</div>
-      <div class="sub">IDR Billion pipeline</div>
-      <div class="delta flat">≈ Flat pipeline value</div>
-    </div>
+    <div class="kpi" style="--c:#3b82d4"><div class="label">Campaigns</div><div class="val">140 → 133</div><div class="sub2">2024 → 2025</div><div class="delta down">▼ 5%</div></div>
+    <div class="kpi" style="--c:#7c5cd8"><div class="label">Total Leads</div><div class="val">85K → 79K</div><div class="sub2">2024 → 2025</div><div class="delta down">▼ 6.6%</div></div>
+    <div class="kpi" style="--c:#0891b2"><div class="label">Investment</div><div class="val">12.23 → 11.79B</div><div class="sub2">IDR</div><div class="delta down">▼ 3.6%</div></div>
+    <div class="kpi" style="--c:#16a34a"><div class="label">Deal/Win</div><div class="val">133 → 133.4B</div><div class="sub2">IDR</div><div class="delta up">▲ +0.3%</div></div>
+    <div class="kpi" style="--c:#f59e0b"><div class="label">Overall ROI</div><div class="val">10.88 → 11.31x</div><div class="sub2">Deal/Invest</div><div class="delta up">▲ +3.9%</div></div>
+    <div class="kpi" style="--c:#e11d48"><div class="label">Opportunity</div><div class="val">579 → 578.7B</div><div class="sub2">Pipeline IDR</div><div class="delta flat">≈ Flat</div></div>
   </div>
-
-  <div class="grid-2">
+  <div class="grid2">
     <div class="card">
-      <div class="card-header"><h3>Leads & Deal: 2024 vs 2025 per Bulan</h3></div>
-      <div class="chart-box"><div id="chart-yoy-bar" style="height:300px"></div></div>
+      <div class="ch"><h3>Channel Category — YoY Detail</h3></div>
+      <div class="cb">
+        <div class="yoy-row hdr"><div>Kategori / Metrik</div><div class="rv">2024</div><div class="rv">2025</div><div class="rv">Δ</div></div>
+        <div class="yoy-row"><div><b>Event — Leads</b></div><div class="rv">17,355</div><div class="rv">18,395</div><div class="rv up">▲ +6.0%</div></div>
+        <div class="yoy-row"><div><b>Event — Deal (B)</b></div><div class="rv">99.73</div><div class="rv">104.79</div><div class="rv up">▲ +5.1%</div></div>
+        <div class="yoy-row"><div><b>Event — ROI</b></div><div class="rv">8.89x</div><div class="rv">9.69x</div><div class="rv up">▲ +9.0%</div></div>
+        <div style="height:6px"></div>
+        <div class="yoy-row"><div><b>Digital — Leads</b></div><div class="rv">67,737</div><div class="rv">61,081</div><div class="rv down">▼ −9.8%</div></div>
+        <div class="yoy-row"><div><b>Digital — Deal (B)</b></div><div class="rv">33.30</div><div class="rv">28.57</div><div class="rv down">▼ −14.2%</div></div>
+        <div class="yoy-row"><div><b>Digital — ROI</b></div><div class="rv">33.07x</div><div class="rv">29.26x</div><div class="rv down">▼ −11.5%</div></div>
+      </div>
     </div>
     <div class="card">
-      <div class="card-header"><h3>ROI per Kategori Channel — YoY</h3></div>
-      <div class="chart-box"><div id="chart-yoy-roi" style="height:300px"></div></div>
-    </div>
-  </div>
-
-  <div class="card" style="margin-bottom:16px">
-    <div class="card-header"><h3>Channel Category Performance Comparison</h3></div>
-    <div class="card-body">
-      <div class="comp-row header">
-        <div>Kategori Channel</div>
-        <div class="comp-val">2024</div>
-        <div class="comp-val">2025</div>
-        <div class="comp-val">Perubahan</div>
-      </div>
-      <div class="comp-row">
-        <div><b>Event — Leads</b></div>
-        <div class="comp-val">17,355</div>
-        <div class="comp-val">18,395</div>
-        <div class="comp-val"><span style="color:#16a34a">▲ +6.0%</span></div>
-      </div>
-      <div class="comp-row">
-        <div><b>Event — Deal (Rp B)</b></div>
-        <div class="comp-val">99.73</div>
-        <div class="comp-val">104.79</div>
-        <div class="comp-val"><span style="color:#16a34a">▲ +5.1%</span></div>
-      </div>
-      <div class="comp-row">
-        <div><b>Event — ROI</b></div>
-        <div class="comp-val">8.89x</div>
-        <div class="comp-val">9.69x</div>
-        <div class="comp-val"><span style="color:#16a34a">▲ +9.0%</span></div>
-      </div>
-      <div class="comp-row">
-        <div><b>Digital Marketing — Leads</b></div>
-        <div class="comp-val">67,737</div>
-        <div class="comp-val">61,081</div>
-        <div class="comp-val"><span style="color:#dc2626">▼ −9.8%</span></div>
-      </div>
-      <div class="comp-row">
-        <div><b>Digital Marketing — Deal (Rp B)</b></div>
-        <div class="comp-val">33.30</div>
-        <div class="comp-val">28.57</div>
-        <div class="comp-val"><span style="color:#dc2626">▼ −14.2%</span></div>
-      </div>
-      <div class="comp-row">
-        <div><b>Digital Marketing — ROI</b></div>
-        <div class="comp-val">33.07x</div>
-        <div class="comp-val">29.26x</div>
-        <div class="comp-val"><span style="color:#dc2626">▼ −11.5%</span></div>
+      <div class="ch"><h3>Top 5 per Tahun — Deal Value</h3></div>
+      <div class="cb scroll-x">
+        <div style="font-size:10px;font-weight:700;color:#57606a;margin-bottom:6px">📅 2024</div>
+        <table style="margin-bottom:10px">
+          <tr><th>Campaign</th><th>Leads</th><th>ROI</th><th>Deal (B)</th></tr>
+          <tr><td style="font-size:10px">CX Day - Yogyakarta (Sep)</td><td>447</td><td>22.3x</td><td style="color:#16a34a;font-weight:800">6.67</td></tr>
+          <tr><td style="font-size:10px">Innovation Summit - Yogyakarta (Mar)</td><td>228</td><td>17.5x</td><td style="color:#3b82d4;font-weight:700">5.27</td></tr>
+          <tr><td style="font-size:10px">AI Roadshow - Makassar (Sep)</td><td>372</td><td>19.9x</td><td style="color:#3b82d4;font-weight:700">4.91</td></tr>
+          <tr><td style="font-size:10px">AI Roadshow - Jakarta (Des)</td><td>318</td><td>10.4x</td><td>4.44</td></tr>
+          <tr><td style="font-size:10px">Tech Day - Bali (Jun)</td><td>310</td><td>13.3x</td><td>4.21</td></tr>
+        </table>
+        <div style="font-size:10px;font-weight:700;color:#57606a;margin-bottom:6px">📅 2025</div>
+        <table>
+          <tr><th>Campaign</th><th>Leads</th><th>ROI</th><th>Deal (B)</th></tr>
+          <tr><td style="font-size:10px">Tech Day - Medan (Mei)</td><td>411</td><td>24.5x</td><td style="color:#16a34a;font-weight:800">6.18</td></tr>
+          <tr><td style="font-size:10px">AI Roadshow - Jakarta (Agt)</td><td>424</td><td>25.6x</td><td style="color:#3b82d4;font-weight:700">5.22</td></tr>
+          <tr><td style="font-size:10px">Innovation Summit - Yogyakarta (Feb)</td><td>449</td><td>15.1x</td><td style="color:#3b82d4;font-weight:700">4.57</td></tr>
+          <tr><td style="font-size:10px">AI Roadshow - Yogyakarta (Jun)</td><td>418</td><td>12.7x</td><td>4.32</td></tr>
+          <tr><td style="font-size:10px">CX Day - Bandung (Jul)</td><td>409</td><td>10.5x</td><td>4.26</td></tr>
+        </table>
       </div>
     </div>
   </div>
-
-  <div class="card">
-    <div class="card-header"><h3>Monthly Deal Value — 2024 vs 2025 Overlay</h3><span class="badge">IDR Billion</span></div>
-    <div class="chart-box"><div id="chart-yoy-line" style="height:300px"></div></div>
+  <div class="ig">
+    <div class="ibox b">📊 <b>2025: Do More With Less.</b> Campaigns −5%, leads −6.6%, spend −3.6% — tapi deal TETAP sama (Rp 133B) dan ROI naik +3.9%.</div>
+    <div class="ibox g">🏆 <b>Event Channel Makin Kuat di 2025:</b> Leads +6%, Deal +5.1%, ROI +9%. Strategi first-party event semakin matang.</div>
+    <div class="ibox y">⚠️ <b>Digital Marketing Melemah di 2025:</b> Leads −9.8%, Deal −14.2%, ROI −11.5%. Perlu audit kualitas targeting digital.</div>
+    <div class="ibox r">🔍 <b>September 2024 Anomali:</b> Deal Rp 18.38B di Sep'24 jauh di atas Sep'25 (Rp 10.87B). Perlu investigasi campaign mana yang outstanding.</div>
   </div>
 </div>
+</div>
 
-<!-- ======================== TAB: RECOMMENDATIONS ======================== -->
-<div id="tab-recommendations" class="tab-content">
-  <div class="section-title">Key Insights & Strategic Recommendations</div>
-
-  <div class="insight-grid">
-    <div class="insight-box green">
-      ✅ <b>Email Campaign = ROI Champion</b><br>
-      Digital Email menghasilkan ROI rata-rata <b>63.9x</b> dengan CPL terendah (Rp 5,367/lead). Top campaign tembus ROI 156x. Rekomendasi: <b>tingkatkan budget email 20–30%</b>, fokus pada segmen lead nurturing &amp; event invitation.
-    </div>
-    <div class="insight-box">
-      🎯 <b>In-Person Event = Revenue Generator</b><br>
-      Meski ROI lebih rendah (9.71x), In-Person Event menghasilkan deal terbesar absolut (Rp 123.5B). IBM CX Day Yogyakarta Sep'24 = Rp 6.67B deal sendirian. Rekomendasi: <b>fokus kota Tier-1 (Jakarta, Yogyakarta, Medan)</b> untuk event berskala besar.
-    </div>
-    <div class="insight-box yellow">
-      ⚠️ <b>In-Person Third Party Event — Efisiensi Rendah</b><br>
-      Sponsorship pihak ketiga memiliki ROI 6.71x dan CPL tertinggi (Rp 752K/lead). Anggaran besar (Rp 5.86B) hanya menghasilkan 7,796 leads. Rekomendasi: <b>kurangi sponsorship eksternal, alihkan ke first-party event</b>.
-    </div>
-    <div class="insight-box">
-      📈 <b>Webinar First-Party Sangat Efisien</b><br>
-      Webinar sendiri (First Party) = ROI 14.98x dengan CPL Rp 204K — jauh lebih efisien dari third-party (8.21x, Rp 253K). Rekomendasi: <b>gantikan sponsorship webinar eksternal dengan seri webinar IBM sendiri</b>.
-    </div>
-    <div class="insight-box red">
-      🔴 <b>Digital — Social Media Perlu Optimasi</b><br>
-      Social Media ROI 16.24x tapi CPL Rp 30,644 — 5x lebih mahal dari Email. Leads yang dihasilkan lebih sedikit secara proporsi. Rekomendasi: <b>fokus konten LinkedIn (bukan Twitter/X)</b> untuk B2B dan pastikan ada landing page conversion yang kuat.
-    </div>
-    <div class="insight-box green">
-      🏆 <b>Minyak &amp; Gas + Telekomunikasi = Best Converters</b><br>
-      Industri Minyak &amp; Gas memiliki deal rate 2.1% dan Telekomunikasi 1.9% — tertinggi dari 14 industri. Rekomendasi: <b>buat campaign vertikal khusus O&amp;G dan Telco</b> dengan konten case study yang spesifik industri.
-    </div>
-    <div class="insight-box yellow">
-      📅 <b>September &amp; Desember = Peak Months</b><br>
-      September 2024 mencatat leads tertinggi (9,393) dan deal terbesar (Rp 18.38B). Desember konsisten memiliki rebound leads. Rekomendasi: <b>perbesar alokasi budget Q3 (Jul–Sep)</b> terutama untuk event fisik &amp; pipeline closing push di Q4.
-    </div>
-    <div class="insight-box">
-      📊 <b>2025: Lebih Efisien, Bukan Lebih Besar</b><br>
-      2025 vs 2024: leads turun 6.6%, investasi turun 3.6%, tapi deal hampir sama (Rp 133.36B vs 133.02B) dan ROI meningkat 3.9%. Rekomendasi: <b>pertahankan strategi efisiensi ini</b>, fokus quality over quantity, terutama di Event channel yang ROI-nya tumbuh +9%.
-    </div>
+<!-- ════════════════ TAB: INSIGHTS ════════════════ -->
+<div id="tab-recommendations" class="tab-pane">
+<div class="body">
+  <div class="ig">
+    <div class="ibox g">✅ <b>Email = ROI Champion (63.9x avg, 156x peak):</b> CPL hanya Rp 5,367. Rekomendasi: naikkan budget email 20–30% untuk 2026.</div>
+    <div class="ibox b">🎯 <b>In-Person First-Party = Revenue Engine (Rp 123.5B):</b> ROI 9.71x. Fokus kota Tier-1: Yogyakarta, Jakarta, Medan.</div>
+    <div class="ibox y">⚠️ <b>In-Person Third-Party Tidak Efisien (ROI 6.71x):</b> CPL Rp 752K. Kurangi sponsorship eksternal, alihkan ke first-party event.</div>
+    <div class="ibox b">📈 <b>Webinar First-Party Efisien (ROI 15x):</b> CPL Rp 204K. Gantikan webinar sponsorship eksternal dengan IBM Webinar Series.</div>
+    <div class="ibox r">🔴 <b>Social Media Perlu Optimasi (CPL Rp 30K):</b> 5x lebih mahal dari email. Fokus LinkedIn untuk B2B.</div>
+    <div class="ibox g">🏭 <b>Minyak &amp; Gas + Telekomunikasi = Best Converting (2.1%, 1.9%):</b> Buat campaign vertikal O&amp;G &amp; Telco.</div>
+    <div class="ibox y">📅 <b>September &amp; Desember = Peak Months:</b> Sep'24 deal Rp 18.38B. Perbesar budget Q3 (Jul–Sep) dan Q4 closing push.</div>
+    <div class="ibox b">📊 <b>2025 = Lebih Efisien, Pertahankan:</b> Spend −3.6%, deal stable (+0.3%), ROI +3.9%. Fokus quality over quantity.</div>
   </div>
-
-  <div class="card" style="margin-bottom:16px">
-    <div class="card-header"><h3>Budget Allocation Recommendation (2026)</h3></div>
-    <div class="chart-box"><div id="chart-budget-rec" style="height:280px"></div></div>
-  </div>
-
   <div class="card">
-    <div class="card-header"><h3>Priority Action Matrix</h3></div>
-    <div class="card-body scroll-x">
+    <div class="ch"><h3>Priority Action Matrix 2026</h3></div>
+    <div class="cb scroll-x">
       <table>
         <tr><th>Priority</th><th>Action</th><th>Channel</th><th>Expected Impact</th><th>Timeline</th></tr>
-        <tr><td><span class="tag" style="background:#fee2e2;color:#dc2626">P1 – Segera</span></td><td>Scale Email Campaign budget +25%</td><td><span class="tag tag-email">Email</span></td><td>ROI 100x+, low cost</td><td>Q1 2026</td></tr>
-        <tr><td><span class="tag" style="background:#fee2e2;color:#dc2626">P1 – Segera</span></td><td>Fokus IBM First-Party Event di Yogyakarta, Jakarta, Medan</td><td><span class="tag tag-event">In-Person</span></td><td>Deal Rp 4–6B/event</td><td>Q1–Q2 2026</td></tr>
-        <tr><td><span class="tag" style="background:#fef3c7;color:#92400e">P2 – Penting</span></td><td>Ganti sponsorship eksternal → IBM Webinar Series</td><td><span class="tag tag-webinar">Webinar</span></td><td>ROI naik +6x</td><td>Q2 2026</td></tr>
-        <tr><td><span class="tag" style="background:#fef3c7;color:#92400e">P2 – Penting</span></td><td>Buat campaign vertikal O&amp;G &amp; Telco</td><td>Multi</td><td>Conv. rate 2.1%</td><td>Q2 2026</td></tr>
-        <tr><td><span class="tag" style="background:#f0fdf4;color:#15803d">P3 – Nice-to-Have</span></td><td>Optimalkan LinkedIn vs Twitter/X budget</td><td><span class="tag tag-social">Social</span></td><td>CPL efficiency</td><td>Q3 2026</td></tr>
+        <tr><td><span class="tag" style="background:#fee2e2;color:#dc2626">P1 – Segera</span></td><td>Scale Email Campaign budget +25%</td><td><span class="tag t-email">Email</span></td><td>ROI 100x+</td><td>Q1 2026</td></tr>
+        <tr><td><span class="tag" style="background:#fee2e2;color:#dc2626">P1 – Segera</span></td><td>Fokus First-Party Event di Yogyakarta, Jakarta, Medan</td><td><span class="tag t-event">In-Person</span></td><td>Deal Rp 4–6B/event</td><td>Q1–Q2 2026</td></tr>
+        <tr><td><span class="tag" style="background:#fef3c7;color:#92400e">P2 – Penting</span></td><td>Ganti webinar sponsorship → IBM Webinar Series</td><td><span class="tag t-webinar">Webinar</span></td><td>ROI naik +6x</td><td>Q2 2026</td></tr>
+        <tr><td><span class="tag" style="background:#fef3c7;color:#92400e">P2 – Penting</span></td><td>Buat campaign vertikal O&amp;G &amp; Telco</td><td>Multi</td><td>Conv. rate 2.5%+</td><td>Q2 2026</td></tr>
+        <tr><td><span class="tag" style="background:#f0fdf4;color:#15803d">P3 – Nice-to-Have</span></td><td>Shift social media dari Twitter/X ke LinkedIn</td><td><span class="tag t-social">Social</span></td><td>CPL efficiency</td><td>Q3 2026</td></tr>
         <tr><td><span class="tag" style="background:#f0fdf4;color:#15803d">P3 – Nice-to-Have</span></td><td>Double down September campaign push</td><td>All</td><td>Peak season leverage</td><td>Q3 2026</td></tr>
       </table>
     </div>
   </div>
 </div>
+</div>
 
 <script>
-// ============================================================
-//  DATA
-// ============================================================
-const DATA = {
-  channels: {
-    labels: ["Email","Social Media","Website","In-Person 1st","In-Person 3rd","Webinar 1st","Webinar 3rd"],
-    leads:   [72776, 31742, 24300, 12524, 7796, 9642, 5788],
-    invest:  [0.39, 0.97, 0.62, 12.72, 5.86, 1.98, 1.47],
-    deal:    [24.97, 15.79, 21.11, 123.50, 39.35, 29.60, 12.07],
-    roi:     [63.93, 16.24, 34.03, 9.71, 6.71, 14.98, 8.21],
-    cpl:     [5367, 30644, 25522, 1015873, 752295, 204858, 253790]
-  },
-  cat: {
-    labels: ["Event","Digital Marketing"],
-    invest2024: [11.22, 1.01], invest2025: [10.81, 0.98],
-    deal2024:   [99.73, 33.30], deal2025: [104.79, 28.57],
-    roi2024:    [8.89, 33.07], roi2025: [9.69, 29.26],
-    leads2024:  [17355, 67737], leads2025: [18395, 61081]
-  },
-  monthly: {
-    labels: ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agt","Sep","Okt","Nov","Des"],
-    leads2024:  [5494,5812,5254,6822,6019,6100,9042,7103,9393,7331,6448,10274],
-    leads2025:  [6888,6680,6919,8306,4992,6991,7925,5466,6842,5591,7570,5306],
-    deal2024:   [8.35,7.83,14.05,8.72,8.89,14.96,8.94,12.22,18.38,11.20,6.27,13.23],
-    deal2025:   [14.25,12.83,10.13,7.25,10.77,9.19,10.30,12.54,10.87,8.78,12.05,14.40],
-    invest2024: [1.25,0.63,0.84,1.02,0.70,1.30,0.66,1.06,1.43,1.11,0.88,1.36],
-    invest2025: [1.30,1.18,1.06,0.72,0.52,0.62,0.71,0.91,1.32,1.13,1.25,1.07]
-  },
-  industry: {
-    labels: ["Minyak & Gas","Telekomunikasi","Teknologi/IT","Kesehatan","Manufaktur","Pemerintahan","Energi","Ritel","Logistik","Pendidikan","Perbankan","Otomotif","Media","Asuransi"],
-    dealRate:[2.1,1.9,1.8,1.8,1.8,1.7,1.7,1.7,1.6,1.6,1.6,1.6,1.6,1.5],
-    oppRate: [4.9,5.1,5.1,4.8,4.8,5.2,4.7,5.1,5.0,5.2,5.1,5.0,5.8,5.2]
-  }
-};
-
-// ============================================================
-//  CHART UTILS
-// ============================================================
-const colors = {
-  blue:"#3b82d4", purple:"#7c5cd8", teal:"#0891b2", green:"#16a34a",
-  amber:"#f59e0b", red:"#e11d48", indigo:"#4f46e5", orange:"#ea580c"
-};
-const palette = Object.values(colors);
-
-function makeChart(id) {
-  const el = document.getElementById(id);
-  if (!el) return null;
-  return echarts.init(el);
-}
-
-// ============================================================
-//  OVERVIEW CHARTS
-// ============================================================
-function initOverview() {
-  // Channel leads bar
-  const c1 = makeChart("chart-channel-leads");
-  if(c1) c1.setOption({
-    tooltip:{trigger:"axis"},
-    grid:{left:120,right:20,top:15,bottom:30},
-    xAxis:{type:"value",axisLabel:{formatter:v=>v>=1000?(v/1000).toFixed(0)+"K":v}},
-    yAxis:{type:"category",data:[...DATA.channels.labels].reverse(),axisLabel:{fontSize:11}},
-    series:[{type:"bar",data:[...DATA.channels.leads].reverse(),itemStyle:{color:(p)=>palette[p.dataIndex%palette.length]},label:{show:true,position:"right",formatter:p=>(p.value/1000).toFixed(1)+"K",fontSize:10}}]
-  });
-
-  // Category invest vs deal
-  const c2 = makeChart("chart-cat-invest-deal");
-  if(c2) c2.setOption({
-    tooltip:{trigger:"axis"},
-    legend:{bottom:0,textStyle:{fontSize:11}},
-    grid:{left:40,right:20,top:20,bottom:40},
-    xAxis:{type:"category",data:["Event 2024","Event 2025","Digital 2024","Digital 2025"],axisLabel:{fontSize:10}},
-    yAxis:{type:"value",name:"Rp B",nameTextStyle:{fontSize:10}},
-    series:[
-      {name:"Investment",type:"bar",data:[11.22,10.81,1.01,0.98],itemStyle:{color:"#0891b2"}},
-      {name:"Deal/Win",type:"bar",data:[99.73,104.79,33.30,28.57],itemStyle:{color:"#16a34a"}}
-    ]
-  });
-
-  // Campaign distribution pie
-  const c3 = makeChart("chart-campaign-dist");
-  if(c3) c3.setOption({
-    tooltip:{trigger:"item",formatter:"{b}: {c} campaigns ({d}%)"},
-    legend:{bottom:0,textStyle:{fontSize:10}},
-    series:[{type:"pie",radius:["40%","70%"],center:["50%","45%"],
-      data:[
-        {name:"Digital Email",value:46},{name:"Digital Social Media",value:46},
-        {name:"Digital Website",value:46},{name:"In-Person 1st Party",value:32},
-        {name:"In-Person 3rd Party",value:32},{name:"Webinar 1st Party",value:40},
-        {name:"Webinar 3rd Party",value:31}
-      ],
-      label:{fontSize:10}
-    }]
-  });
-
-  // ROI per channel
-  const c4 = makeChart("chart-roi-channel");
-  if(c4) c4.setOption({
-    tooltip:{trigger:"axis"},
-    grid:{left:120,right:30,top:15,bottom:30},
-    xAxis:{type:"value",name:"ROI (x)"},
-    yAxis:{type:"category",data:[...DATA.channels.labels].reverse(),axisLabel:{fontSize:11}},
-    series:[{type:"bar",data:[...DATA.channels.roi].reverse(),
-      itemStyle:{color:(p)=>{const v=DATA.channels.roi[DATA.channels.roi.length-1-p.dataIndex];return v>=30?"#16a34a":v>=14?"#3b82d4":v>=9?"#f59e0b":"#e11d48"}},
-      label:{show:true,position:"right",formatter:p=>p.value+"x",fontSize:10}
-    }]
-  });
-}
-
-// ============================================================
-//  ROI CHARTS
-// ============================================================
-function initROI() {
-  const c1 = makeChart("chart-cpl");
-  if(c1) c1.setOption({
-    tooltip:{trigger:"axis",formatter:(p)=>`${p[0].name}<br>CPL: Rp ${p[0].value.toLocaleString()}`},
-    grid:{left:130,right:30,top:15,bottom:30},
-    xAxis:{type:"value",axisLabel:{formatter:v=>v>=1000?(v/1000).toFixed(0)+"K":v}},
-    yAxis:{type:"category",data:[...DATA.channels.labels].reverse(),axisLabel:{fontSize:11}},
-    series:[{type:"bar",data:[...DATA.channels.cpl].reverse(),
-      itemStyle:{color:(p)=>{const v=DATA.channels.cpl[DATA.channels.cpl.length-1-p.dataIndex];return v<10000?"#16a34a":v<100000?"#f59e0b":"#e11d48"}},
-      label:{show:true,position:"right",formatter:p=>p.value>=1000000?"Rp"+(p.value/1000000).toFixed(0)+"M":p.value>=1000?"Rp"+(p.value/1000).toFixed(0)+"K":"Rp"+p.value,fontSize:10}
-    }]
-  });
-
-  const c2 = makeChart("chart-roi-scatter");
-  if(c2) c2.setOption({
-    tooltip:{trigger:"item",formatter:(p)=>`${p.data[3]}<br>ROI: ${p.data[0]}x<br>Deal: Rp${p.data[1]}B<br>Leads: ${(p.data[2]/1000).toFixed(0)}K`},
-    grid:{left:60,right:30,top:20,bottom:40},
-    xAxis:{type:"value",name:"ROI (x)",min:0},
-    yAxis:{type:"value",name:"Deal (Rp B)"},
-    series:[{type:"scatter",
-      data:DATA.channels.labels.map((l,i)=>[DATA.channels.roi[i],DATA.channels.deal[i],DATA.channels.leads[i],l]),
-      symbolSize:(v)=>Math.max(12,Math.min(50,v[2]/1500)),
-      itemStyle:{color:(p)=>palette[p.dataIndex]},
-      label:{show:true,formatter:(p)=>p.data[3].split(" ")[0],fontSize:9,position:"top"}
-    }]
-  });
-}
-
-// ============================================================
-//  INDUSTRY CHARTS
-// ============================================================
-function initIndustry() {
-  const c1 = makeChart("chart-industry-conv");
-  if(c1) c1.setOption({
-    tooltip:{trigger:"axis",formatter:(p)=>`${p[0].name}: ${p[0].value}%`},
-    grid:{left:170,right:40,top:10,bottom:20},
-    xAxis:{type:"value",max:3,axisLabel:{formatter:v=>v+"%"}},
-    yAxis:{type:"category",data:[...DATA.industry.labels].reverse(),axisLabel:{fontSize:10}},
-    series:[{type:"bar",data:[...DATA.industry.dealRate].reverse(),
-      itemStyle:{color:(p)=>{const v=DATA.industry.dealRate[DATA.industry.dealRate.length-1-p.dataIndex];return v>=2?"#16a34a":v>=1.8?"#3b82d4":"#f59e0b"}},
-      label:{show:true,position:"right",formatter:p=>p.value+"%",fontSize:10}
-    }]
-  });
-
-  const c2 = makeChart("chart-industry-opp");
-  if(c2) c2.setOption({
-    tooltip:{trigger:"axis",formatter:(p)=>`${p[0].name}: ${p[0].value}%`},
-    grid:{left:170,right:40,top:10,bottom:20},
-    xAxis:{type:"value",max:7,axisLabel:{formatter:v=>v+"%"}},
-    yAxis:{type:"category",data:[...DATA.industry.labels].reverse(),axisLabel:{fontSize:10}},
-    series:[{type:"bar",data:[...DATA.industry.oppRate].reverse(),
-      itemStyle:{color:"#7c5cd8"},
-      label:{show:true,position:"right",formatter:p=>p.value+"%",fontSize:10}
-    }]
-  });
-}
-
-// ============================================================
-//  SEASONAL CHARTS
-// ============================================================
-function initSeasonal() {
-  const c1 = makeChart("chart-monthly-leads");
-  if(c1) c1.setOption({
-    tooltip:{trigger:"axis"},
-    legend:{bottom:0,textStyle:{fontSize:11}},
-    grid:{left:50,right:20,top:20,bottom:40},
-    xAxis:{type:"category",data:DATA.monthly.labels},
-    yAxis:{type:"value",name:"Leads",axisLabel:{formatter:v=>v>=1000?(v/1000).toFixed(0)+"K":v}},
-    series:[
-      {name:"2024",type:"line",data:DATA.monthly.leads2024,smooth:true,lineStyle:{width:2.5},itemStyle:{color:"#3b82d4"},areaStyle:{color:"rgba(59,130,212,0.1)"}},
-      {name:"2025",type:"line",data:DATA.monthly.leads2025,smooth:true,lineStyle:{width:2.5,type:"dashed"},itemStyle:{color:"#e11d48"},areaStyle:{color:"rgba(225,29,72,0.07)"}}
-    ]
-  });
-
-  const c2 = makeChart("chart-monthly-deal");
-  if(c2) c2.setOption({
-    tooltip:{trigger:"axis",formatter:(p)=>p.map(s=>`${s.seriesName}: Rp ${s.value}B`).join("<br>")},
-    legend:{bottom:0,textStyle:{fontSize:11}},
-    grid:{left:50,right:20,top:20,bottom:40},
-    xAxis:{type:"category",data:DATA.monthly.labels},
-    yAxis:{type:"value",name:"Rp B"},
-    series:[
-      {name:"2024",type:"bar",data:DATA.monthly.deal2024,itemStyle:{color:"#3b82d4"}},
-      {name:"2025",type:"bar",data:DATA.monthly.deal2025,itemStyle:{color:"#7c5cd8"}}
-    ]
-  });
-
-  const c3 = makeChart("chart-monthly-invest");
-  if(c3) c3.setOption({
-    tooltip:{trigger:"axis"},
-    legend:{bottom:0,textStyle:{fontSize:11}},
-    grid:{left:50,right:20,top:20,bottom:40},
-    xAxis:{type:"category",data:DATA.monthly.labels},
-    yAxis:{type:"value",name:"Rp B"},
-    series:[
-      {name:"2024",type:"line",data:DATA.monthly.invest2024,smooth:true,itemStyle:{color:"#0891b2"}},
-      {name:"2025",type:"line",data:DATA.monthly.invest2025,smooth:true,lineStyle:{type:"dashed"},itemStyle:{color:"#f59e0b"}}
-    ]
-  });
-}
-
-// ============================================================
-//  YoY CHARTS
-// ============================================================
-function initYoY() {
-  const c1 = makeChart("chart-yoy-bar");
-  if(c1) c1.setOption({
-    tooltip:{trigger:"axis"},
-    legend:{bottom:0,textStyle:{fontSize:11}},
-    grid:{left:50,right:20,top:20,bottom:40},
-    xAxis:{type:"category",data:DATA.monthly.labels},
-    yAxis:[
-      {type:"value",name:"Leads",position:"left",axisLabel:{formatter:v=>v>=1000?(v/1000).toFixed(0)+"K":v}},
-      {type:"value",name:"Deal (Rp B)",position:"right"}
-    ],
-    series:[
-      {name:"Leads 2024",type:"bar",yAxisIndex:0,data:DATA.monthly.leads2024,itemStyle:{color:"rgba(59,130,212,0.6)"},stack:"leads24"},
-      {name:"Leads 2025",type:"bar",yAxisIndex:0,data:DATA.monthly.leads2025,itemStyle:{color:"rgba(225,29,72,0.6)"},stack:"leads25"},
-      {name:"Deal 2024",type:"line",yAxisIndex:1,data:DATA.monthly.deal2024,lineStyle:{width:2},itemStyle:{color:"#3b82d4"},smooth:true},
-      {name:"Deal 2025",type:"line",yAxisIndex:1,data:DATA.monthly.deal2025,lineStyle:{width:2,type:"dashed"},itemStyle:{color:"#e11d48"},smooth:true}
-    ]
-  });
-
-  const c2 = makeChart("chart-yoy-roi");
-  if(c2) c2.setOption({
-    tooltip:{trigger:"axis"},
-    legend:{bottom:0,textStyle:{fontSize:11}},
-    grid:{left:50,right:20,top:20,bottom:40},
-    xAxis:{type:"category",data:["Event","Digital Marketing"]},
-    yAxis:{type:"value",name:"ROI (x)"},
-    series:[
-      {name:"ROI 2024",type:"bar",data:[8.89,33.07],itemStyle:{color:"#3b82d4"},label:{show:true,position:"top",formatter:p=>p.value+"x",fontSize:11}},
-      {name:"ROI 2025",type:"bar",data:[9.69,29.26],itemStyle:{color:"#16a34a"},label:{show:true,position:"top",formatter:p=>p.value+"x",fontSize:11}}
-    ]
-  });
-
-  const c3 = makeChart("chart-yoy-line");
-  if(c3) c3.setOption({
-    tooltip:{trigger:"axis"},
-    legend:{bottom:0,textStyle:{fontSize:11}},
-    grid:{left:50,right:20,top:20,bottom:40},
-    xAxis:{type:"category",data:DATA.monthly.labels},
-    yAxis:{type:"value",name:"Rp B"},
-    series:[
-      {name:"Deal 2024",type:"line",data:DATA.monthly.deal2024,smooth:true,lineStyle:{width:2.5},itemStyle:{color:"#3b82d4"},
-        markPoint:{data:[{type:"max",name:"Max",label:{fontSize:10}}]}},
-      {name:"Deal 2025",type:"line",data:DATA.monthly.deal2025,smooth:true,lineStyle:{width:2.5,type:"dashed"},itemStyle:{color:"#e11d48"},
-        markPoint:{data:[{type:"max",name:"Max",label:{fontSize:10}}]}}
-    ]
-  });
-}
-
-// ============================================================
-//  RECOMMENDATIONS CHART
-// ============================================================
-function initRec() {
-  const c1 = makeChart("chart-budget-rec");
-  if(c1) c1.setOption({
-    tooltip:{trigger:"item",formatter:"{b}: {c}% of budget"},
-    legend:{bottom:0,textStyle:{fontSize:11},orient:"horizontal"},
-    series:[{
-      type:"pie",radius:["35%","65%"],center:["50%","45%"],
-      data:[
-        {name:"In-Person First Party Event",value:40,itemStyle:{color:"#3b82d4"}},
-        {name:"Digital Email Campaign",value:25,itemStyle:{color:"#16a34a"}},
-        {name:"Webinar First Party",value:15,itemStyle:{color:"#7c5cd8"}},
-        {name:"Digital Website",value:10,itemStyle:{color:"#0891b2"}},
-        {name:"Digital Social Media",value:7,itemStyle:{color:"#f59e0b"}},
-        {name:"In-Person Third Party",value:3,itemStyle:{color:"#e11d48"}}
-      ],
-      label:{formatter:"{b}\n{d}%",fontSize:10},
-      emphasis:{itemStyle:{shadowBlur:8}}
-    }]
-  });
-}
-
-// ============================================================
-//  TAB SYSTEM & YEAR FILTER
-// ============================================================
-let activeYear = "all";
-let chartsInitialized = {};
-
 function showTab(name, btn) {
-  // hide all tab contents
-  document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
-  // deactivate all tab buttons
+  document.querySelectorAll(".tab-pane").forEach(el => el.classList.remove("active"));
   document.querySelectorAll(".tab-nav button").forEach(el => el.classList.remove("active"));
-  // show the selected tab
-  const tabEl = document.getElementById("tab-" + name);
-  if (tabEl) tabEl.classList.add("active");
-  // activate the clicked button
+  const pane = document.getElementById("tab-" + name);
+  if (pane) pane.classList.add("active");
   if (btn) btn.classList.add("active");
-
-  // init charts on first visit
-  if (!chartsInitialized[name]) {
-    chartsInitialized[name] = true;
-    setTimeout(() => {
-      if (name === "overview")         initOverview();
-      if (name === "roi")              initROI();
-      if (name === "industry")         initIndustry();
-      if (name === "seasonal")         initSeasonal();
-      if (name === "yoy")              initYoY();
-      if (name === "recommendations")  initRec();
-    }, 50);
-  }
 }
 
 function setYear(yr, btn) {
-  activeYear = yr;
   document.querySelectorAll(".year-toggle button").forEach(b => b.classList.remove("active"));
   if (btn) btn.classList.add("active");
-  // update filter status label
-  const labels = { all: "Semua Tahun (2024 & 2025)", "2024": "Tahun 2024", "2025": "Tahun 2025" };
-  const statusEl = document.getElementById("filter-status");
-  if (statusEl) statusEl.textContent = "Menampilkan data: " + labels[yr];
-  updateKPIs();
-}
-
-function updateKPIs() {
+  const labels = { all:"Semua Tahun (2024 & 2025)", "2024":"Tahun 2024", "2025":"Tahun 2025" };
+  const el = document.getElementById("filter-status");
+  if (el) el.textContent = "Menampilkan data: " + labels[yr];
   const kpis = {
-    all: {campaigns:"273",leads:"164,568",invest:"Rp 24.02B",deal:"Rp 266.38B",roi:"11.1x",opp:"Rp 1,157B"},
-    "2024": {campaigns:"140",leads:"85,092",invest:"Rp 12.23B",deal:"Rp 133.02B",roi:"10.88x",opp:"Rp 579B"},
-    "2025": {campaigns:"133",leads:"79,476",invest:"Rp 11.79B",deal:"Rp 133.36B",roi:"11.31x",opp:"Rp 578.7B"}
+    all:    {campaigns:"273", sc:"140 (2024) + 133 (2025)", leads:"164,568", invest:"Rp 24.02B", deal:"Rp 266.4B",  roi:"11.1x",  opp:"Rp 1,157B", dl:"▼ 6.6% YoY", di:"▼ 3.6% YoY", dd:"▲ +0.3% YoY", dr:"▲ +3.9% YoY"},
+    "2024": {campaigns:"140", sc:"Jan – Des 2024",           leads:"85,092",  invest:"Rp 12.23B", deal:"Rp 133.02B", roi:"10.88x", opp:"Rp 579B",    dl:"",           di:"",            dd:"",              dr:""},
+    "2025": {campaigns:"133", sc:"Jan – Des 2025",           leads:"79,476",  invest:"Rp 11.79B", deal:"Rp 133.36B", roi:"11.31x", opp:"Rp 578.7B",  dl:"",           di:"",            dd:"",              dr:""}
   };
-  const k = kpis[activeYear];
-  document.getElementById("kpi-campaigns").textContent = k.campaigns;
-  document.getElementById("kpi-leads").textContent = k.leads;
-  document.getElementById("kpi-invest").textContent = k.invest;
-  document.getElementById("kpi-deal").textContent = k.deal;
-  document.getElementById("kpi-roi").textContent = k.roi;
-  document.getElementById("kpi-opp").textContent = k.opp;
+  const k = kpis[yr];
+  const set = (id, v) => { const e = document.getElementById(id); if(e) e.textContent = v; };
+  set("kv-campaigns", k.campaigns); set("ks-campaigns", k.sc);
+  set("kv-leads", k.leads);   set("kd-leads", k.dl);
+  set("kv-invest", k.invest);  set("kd-invest", k.di);
+  set("kv-deal", k.deal);    set("kd-deal", k.dd);
+  set("kv-roi", k.roi);     set("kd-roi", k.dr);
+  set("kv-opp", k.opp);
 }
-
-// Init on load
-window.addEventListener("load", () => {
-  chartsInitialized["overview"] = true;
-  setTimeout(initOverview, 100);
-  // make sure first tab button is visually active on load
-  const firstBtn = document.querySelector(".tab-nav button");
-  if (firstBtn) firstBtn.classList.add("active");
-});
-
-window.addEventListener("resize", () => {
-  echarts.getInstanceByDom && document.querySelectorAll("[id^='chart-']").forEach(el=>{
-    const inst = echarts.getInstanceByDom(el);
-    if(inst) inst.resize();
-  });
-});
 </script>
 </body>
 </html>
