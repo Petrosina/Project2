@@ -63,30 +63,46 @@ body{font-family:-apple-system,"Segoe UI",system-ui,sans-serif;background:#f0f2f
 
 /* TABLE */
 table{width:100%;border-collapse:collapse;font-size:11px}
-th{background:#f7f8fa;padding:6px 8px;text-align:left;color:#57606a;font-size:10px;text-transform:uppercase;border-bottom:2px solid #e5e7eb;white-space:nowrap}
-td{padding:6px 8px;border-bottom:1px solid #f0f2f5}
+th{background:#f7f8fa;padding:6px 8px;text-align:left;color:#57606a;font-size:10px;text-transform:uppercase;border-bottom:2px solid #e5e7eb;white-space:nowrap;cursor:pointer;user-select:none;transition:background .15s}
+th:hover{background:#eef0f3;color:#1d3557}
+th.sort-asc::after{content:" ▲";font-size:8px;color:#3b82d4}
+th.sort-desc::after{content:" ▼";font-size:8px;color:#3b82d4}
+td{padding:6px 8px;border-bottom:1px solid #f0f2f5;transition:background .12s}
 tr:last-child td{border:none}
-tr:hover td{background:#f7f8fa}
-.tag{display:inline-block;padding:1px 6px;border-radius:8px;font-size:9px;font-weight:700}
+tr:hover td{background:#eef4ff}
+tr.row-highlight td{background:#dbeafe!important;transition:background .2s}
+.tag{display:inline-block;padding:1px 6px;border-radius:8px;font-size:9px;font-weight:700;transition:transform .15s,box-shadow .15s}
+.tag:hover{transform:scale(1.08);box-shadow:0 2px 6px rgba(0,0,0,.12)}
 .t-email{background:#eff6ff;color:#1d4ed8}
 .t-event{background:#fef3c7;color:#92400e}
 .t-web{background:#fdf4ff;color:#7c3aed}
 .t-social{background:#f0fdf4;color:#15803d}
 .t-webinar{background:#fff7ed;color:#c2410c}
-.bar-wrap{background:#f0f2f5;border-radius:4px;height:7px;width:100%;overflow:hidden}
-.bar-fill{height:7px;border-radius:4px}
+.bar-wrap{background:#f0f2f5;border-radius:4px;height:7px;width:100%;overflow:hidden;cursor:pointer}
+.bar-fill{height:7px;border-radius:4px;transition:height .2s,filter .2s}
+.bar-wrap:hover .bar-fill{height:10px;filter:brightness(1.15)}
 
 /* INSIGHT */
 .ig{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 @media(max-width:700px){.ig{grid-template-columns:1fr}}
-.ibox{padding:10px 12px;border-radius:7px;border-left:3px solid;font-size:11px;line-height:1.55}
+.ibox{padding:10px 12px;border-radius:7px;border-left:3px solid;font-size:11px;line-height:1.55;transition:transform .18s,box-shadow .18s,border-left-width .18s;cursor:default}
+.ibox:hover{transform:translateX(4px);box-shadow:0 3px 12px rgba(0,0,0,.1);border-left-width:5px}
 .ibox.g{background:#f0fdf4;border-color:#16a34a;color:#14532d}
 .ibox.b{background:#eff6ff;border-color:#3b82d4;color:#1e3a5f}
 .ibox.y{background:#fffbeb;border-color:#f59e0b;color:#78350f}
 .ibox.r{background:#fff1f2;border-color:#e11d48;color:#9f1239}
 
+/* KPI hover */
+.kpi{transition:transform .18s,box-shadow .18s}
+.kpi:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,.1)}
+
+/* Card hover */
+.card{transition:box-shadow .18s}
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+
 /* YoY comparison rows */
-.yoy-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:6px;padding:6px 0;border-bottom:1px solid #f0f2f5;font-size:11px;align-items:center}
+.yoy-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:6px;padding:6px 0;border-bottom:1px solid #f0f2f5;font-size:11px;align-items:center;transition:background .12s}
+.yoy-row:not(.hdr):hover{background:#eef4ff;border-radius:4px;padding-left:6px}
 .yoy-row.hdr{font-size:10px;font-weight:700;color:#57606a;text-transform:uppercase}
 .rv{text-align:right;font-weight:600}
 
@@ -96,9 +112,34 @@ tr:hover td{background:#f7f8fa}
 
 /* scroll */
 .scroll-x{overflow-x:auto}
+
+/* Tooltip */
+.tooltip{position:fixed;background:#1d3557;color:#fff;font-size:10px;padding:5px 10px;border-radius:6px;pointer-events:none;opacity:0;transition:opacity .15s;z-index:9999;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.25);max-width:220px;white-space:normal;line-height:1.4}
+.tooltip.show{opacity:1}
+
+/* SVG interactive dots */
+.svg-dot{cursor:pointer;transition:r .15s}
+.svg-dot:hover{r:7}
+
+/* Scroll-to-top */
+#scrolltop{position:fixed;bottom:24px;right:24px;width:36px;height:36px;background:#1d3557;color:#fff;border:none;border-radius:50%;font-size:16px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:9999;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+#scrolltop.show{opacity:1;pointer-events:auto}
+#scrolltop:hover{transform:scale(1.1);background:#3b82d4}
+
+/* Tab fade-in */
+.tab-pane.active{display:block;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* Badge hover */
+.topbadge{transition:background .15s,transform .15s}
+.topbadge:hover{background:rgba(255,255,255,.22);transform:scale(1.05)}
 </style>
 </head>
 <body>
+<!-- Tooltip global -->
+<div class="tooltip" id="tt"></div>
+<!-- Scroll to top -->
+<button id="scrolltop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Kembali ke atas">↑</button>
 
 <!-- TOP BAR -->
 <div class="topbar">
@@ -571,6 +612,7 @@ tr:hover td{background:#f7f8fa}
 </div>
 
 <script>
+/* ── Tab switching ── */
 function showTab(name, btn) {
   document.querySelectorAll(".tab-pane").forEach(el => el.classList.remove("active"));
   document.querySelectorAll(".tab-nav button").forEach(el => el.classList.remove("active"));
@@ -579,6 +621,7 @@ function showTab(name, btn) {
   if (btn) btn.classList.add("active");
 }
 
+/* ── Year filter ── */
 function setYear(yr, btn) {
   document.querySelectorAll(".year-toggle button").forEach(b => b.classList.remove("active"));
   if (btn) btn.classList.add("active");
@@ -599,6 +642,128 @@ function setYear(yr, btn) {
   set("kv-roi", k.roi);     set("kd-roi", k.dr);
   set("kv-opp", k.opp);
 }
+
+/* ── Global tooltip ── */
+const tt = document.getElementById("tt");
+function showTT(e, text) {
+  tt.innerHTML = text;
+  tt.classList.add("show");
+  moveTT(e);
+}
+function moveTT(e) {
+  const x = e.clientX + 14, y = e.clientY - 10;
+  tt.style.left = Math.min(x, window.innerWidth - 240) + "px";
+  tt.style.top  = Math.max(y, 8) + "px";
+}
+function hideTT() { tt.classList.remove("show"); }
+
+/* ── KPI tooltip hints ── */
+const kpiHints = {
+  "kv-campaigns": "Jumlah campaign aktif yang dijalankan",
+  "kv-leads":     "Total leads dari semua channel marketing",
+  "kv-invest":    "Total budget marketing yang diinvestasikan",
+  "kv-deal":      "Estimated Deal/Win = revenue aktual yang closing",
+  "kv-roi":       "ROI = Deal/Win ÷ Investment. Avg 11.1x artinya setiap Rp 1 menghasilkan Rp 11",
+  "kv-opp":       "Pipeline aktif = leads yang sudah masuk tahap negosiasi tapi belum closing"
+};
+document.querySelectorAll(".kpi").forEach(card => {
+  const valEl = card.querySelector("[id^='kv-']");
+  if (!valEl) return;
+  const hint = kpiHints[valEl.id];
+  if (!hint) return;
+  card.addEventListener("mouseenter", e => showTT(e, hint));
+  card.addEventListener("mousemove", moveTT);
+  card.addEventListener("mouseleave", hideTT);
+});
+
+/* ── Bar chart tooltip ── */
+document.querySelectorAll(".bar-wrap").forEach(wrap => {
+  const fill = wrap.querySelector(".bar-fill");
+  if (!fill) return;
+  const pct = parseInt(fill.style.width) || 0;
+  const tr = wrap.closest("tr");
+  let label = "";
+  if (tr) {
+    const firstTd = tr.querySelector("td");
+    label = firstTd ? (firstTd.innerText || firstTd.textContent).trim() : "";
+  }
+  const desc = label ? `<b>${label}</b><br>Proporsi relatif: ${pct}%` : `Proporsi relatif: ${pct}%`;
+  wrap.addEventListener("mouseenter", e => showTT(e, desc));
+  wrap.addEventListener("mousemove", moveTT);
+  wrap.addEventListener("mouseleave", hideTT);
+});
+
+/* ── Table sortable columns ── */
+document.querySelectorAll("table").forEach(tbl => {
+  const headers = tbl.querySelectorAll("th");
+  headers.forEach((th, colIdx) => {
+    let dir = 0; // 0=none, 1=asc, -1=desc
+    th.addEventListener("click", () => {
+      const tbody = tbl.querySelector("tbody") || tbl;
+      const rows = Array.from(tbody.querySelectorAll("tr")).filter(r => r.closest("thead") === null && r.querySelectorAll("td").length > 0);
+      if (!rows.length) return;
+      dir = dir === 1 ? -1 : 1;
+      headers.forEach(h => h.classList.remove("sort-asc","sort-desc"));
+      th.classList.add(dir === 1 ? "sort-asc" : "sort-desc");
+      rows.sort((a, b) => {
+        const aT = (a.cells[colIdx]?.innerText || "").trim();
+        const bT = (b.cells[colIdx]?.innerText || "").trim();
+        const aN = parseFloat(aT.replace(/[^\d.-]/g,""));
+        const bN = parseFloat(bT.replace(/[^\d.-]/g,""));
+        if (!isNaN(aN) && !isNaN(bN)) return dir * (aN - bN);
+        return dir * aT.localeCompare(bT, "id");
+      });
+      const parent = rows[0].parentNode;
+      rows.forEach(r => parent.appendChild(r));
+      /* Flash highlight sorted rows */
+      rows.forEach(r => {
+        r.classList.add("row-highlight");
+        setTimeout(() => r.classList.remove("row-highlight"), 600);
+      });
+    });
+  });
+});
+
+/* ── SVG chart interactive dots — Overview & Tren Musiman ── */
+const svgDotData = [
+  /* Overview SVG */
+  {id:"ov-2024-sep",  cx:607, cy:22.7,  label:"Sep 2024",  val:"9,393 leads | Deal Rp 18.38B"},
+  {id:"ov-2024-dec",  cx:808, cy:12.9,  label:"Des 2024",  val:"10,274 leads | Year-end rebound"},
+  {id:"ov-2025-apr",  cx:272, cy:35.2,  label:"Apr 2025",  val:"8,306 leads | Leads peak 2025"},
+  /* Seasonal tab SVG */
+  {id:"tr-2024-sep",  cx:607, cy:22.7,  label:"Sep 2024",  val:"9,393 leads | Deal Rp 18.38B — Best month 2024"},
+  {id:"tr-2024-dec",  cx:808, cy:12.9,  label:"Des 2024",  val:"10,274 leads | Tertinggi sepanjang 2 tahun"},
+  {id:"tr-2025-apr",  cx:272, cy:35.2,  label:"Apr 2025",  val:"8,306 leads | Peak leads 2025"},
+];
+/* Add interactive class & tooltip to all SVG circles */
+document.querySelectorAll("svg circle").forEach((c, i) => {
+  c.classList.add("svg-dot");
+  const cx   = parseFloat(c.getAttribute("cx"));
+  const cy   = parseFloat(c.getAttribute("cy"));
+  /* find matching data */
+  const dot  = svgDotData.find(d => Math.abs(d.cx - cx) < 1 && Math.abs(d.cy - cy) < 1);
+  const hint = dot ? `<b>${dot.label}</b><br>${dot.val}` : `Data point`;
+  c.addEventListener("mouseenter", e => { c.setAttribute("r","6"); showTT(e, hint); });
+  c.addEventListener("mousemove",  moveTT);
+  c.addEventListener("mouseleave", () => { c.setAttribute("r","4"); hideTT(); });
+});
+
+/* ── Scroll-to-top ── */
+const stBtn = document.getElementById("scrolltop");
+window.addEventListener("scroll", () => {
+  stBtn.classList.toggle("show", window.scrollY > 300);
+});
+
+/* ── Table row tooltip: show full campaign name on hover (campaign-name is truncated) ── */
+document.querySelectorAll("td:has(.campaign-name)").forEach(td => {
+  const span = td.querySelector(".campaign-name");
+  if (!span) return;
+  td.addEventListener("mouseenter", e => {
+    if (span.scrollWidth > span.offsetWidth) showTT(e, span.textContent.trim());
+  });
+  td.addEventListener("mousemove", moveTT);
+  td.addEventListener("mouseleave", hideTT);
+});
 </script>
 </body>
 </html>
