@@ -38,15 +38,23 @@ body{font-family:-apple-system,"Segoe UI",system-ui,sans-serif;background:#f0f2f
 .body{padding:18px 24px;max-width:1200px;margin:0 auto}
 
 /* KPI */
-.kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:18px}
+.kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:10px}
 @media(max-width:900px){.kpi-row{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:500px){.kpi-row{grid-template-columns:repeat(2,1fr)}}
-.kpi{background:#fff;border-radius:8px;border:1px solid #e5e7eb;padding:12px 14px;border-top:3px solid var(--c,#3b82d4)}
+.kpi{background:#fff;border-radius:8px;border:1px solid #e5e7eb;padding:12px 14px;border-top:3px solid var(--c,#3b82d4);position:relative}
+.kpi .kpi-icon{font-size:20px;margin-bottom:5px;display:block;line-height:1}
 .kpi .label{font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:#57606a;margin-bottom:4px}
 .kpi .val{font-size:18px;font-weight:800;color:#1d3557}
 .kpi .sub2{font-size:9px;color:#57606a;margin-top:2px}
 .kpi .delta{font-size:10px;font-weight:700;margin-top:3px}
 .up{color:#16a34a}.down{color:#dc2626}.flat{color:#57606a}
+
+/* KPI tab nav bar */
+.kpi-nav{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+.kpi-nav-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border:1.5px solid #e5e7eb;border-radius:20px;background:#fff;color:#57606a;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;text-decoration:none}
+.kpi-nav-btn:hover{border-color:#3b82d4;color:#3b82d4;background:#eff6ff}
+.kpi-nav-btn.active{background:#1d3557;border-color:#1d3557;color:#fff}
+.kpi-nav-btn .nav-icon{font-size:13px}
 
 /* GRID */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;align-items:stretch}
@@ -182,12 +190,23 @@ tr.row-highlight td{background:#dbeafe!important;transition:background .2s}
 <div class="body">
 
 <div class="kpi-row">
-  <div class="kpi" style="--c:#3b82d4"><div class="label">Total Campaigns</div><div class="val" id="kv-campaigns">273</div><div class="sub2" id="ks-campaigns">140 (2024) + 133 (2025)</div></div>
-  <div class="kpi" style="--c:#7c5cd8"><div class="label">Total Leads</div><div class="val" id="kv-leads">164,568</div><div class="sub2">All channels</div><div class="delta down" id="kd-leads">▼ 6.6% YoY</div></div>
-  <div class="kpi" style="--c:#0891b2"><div class="label">Total Investment</div><div class="val" id="kv-invest">Rp 24.02B</div><div class="sub2">Marketing spend</div><div class="delta down" id="kd-invest">▼ 3.6% YoY</div></div>
-  <div class="kpi" style="--c:#16a34a"><div class="label">Total Deal/Win</div><div class="val" id="kv-deal">Rp 266.4B</div><div class="sub2">Closed revenue</div><div class="delta up" id="kd-deal">▲ +0.3% YoY</div></div>
-  <div class="kpi" style="--c:#f59e0b"><div class="label">Avg. ROI</div><div class="val" id="kv-roi">11.1x</div><div class="sub2">Deal / Investment</div><div class="delta up" id="kd-roi">▲ +3.9% YoY</div></div>
-  <div class="kpi" style="--c:#e11d48"><div class="label">Total Opportunity</div><div class="val" id="kv-opp">Rp 1,157B</div><div class="sub2">Pipeline estimate</div><div class="delta flat">≈ Flat YoY</div></div>
+  <div class="kpi" style="--c:#3b82d4"><span class="kpi-icon">📁</span><div class="label">Total Campaigns</div><div class="val" id="kv-campaigns">273</div><div class="sub2" id="ks-campaigns">140 (2024) + 133 (2025)</div></div>
+  <div class="kpi" style="--c:#7c5cd8"><span class="kpi-icon">👥</span><div class="label">Total Leads</div><div class="val" id="kv-leads">164,568</div><div class="sub2">All channels</div><div class="delta down" id="kd-leads">▼ 6.6% YoY</div></div>
+  <div class="kpi" style="--c:#0891b2"><span class="kpi-icon">💰</span><div class="label">Total Investment</div><div class="val" id="kv-invest">Rp 24.02B</div><div class="sub2">Marketing spend</div><div class="delta down" id="kd-invest">▼ 3.6% YoY</div></div>
+  <div class="kpi" style="--c:#16a34a"><span class="kpi-icon">🏆</span><div class="label">Total Deal/Win</div><div class="val" id="kv-deal">Rp 266.4B</div><div class="sub2">Closed revenue</div><div class="delta up" id="kd-deal">▲ +0.3% YoY</div></div>
+  <div class="kpi" style="--c:#f59e0b"><span class="kpi-icon">📈</span><div class="label">Avg. ROI</div><div class="val" id="kv-roi">11.1x</div><div class="sub2">Deal / Investment</div><div class="delta up" id="kd-roi">▲ +3.9% YoY</div></div>
+  <div class="kpi" style="--c:#e11d48"><span class="kpi-icon">🎯</span><div class="label">Total Opportunity</div><div class="val" id="kv-opp">Rp 1,157B</div><div class="sub2">Pipeline estimate</div><div class="delta flat">≈ Flat YoY</div></div>
+</div>
+
+<!-- KPI Navigation Bar -->
+<div class="kpi-nav">
+  <span style="font-size:10px;font-weight:700;color:#57606a;align-self:center;margin-right:4px">Lihat Detail:</span>
+  <button class="kpi-nav-btn active" onclick="showTab('overview',document.querySelector('.tab-nav button'))"><span class="nav-icon">📈</span> Overview</button>
+  <button class="kpi-nav-btn" onclick="showTab('roi',document.querySelectorAll('.tab-nav button')[1])"><span class="nav-icon">💡</span> ROI &amp; Efisiensi</button>
+  <button class="kpi-nav-btn" onclick="showTab('industry',document.querySelectorAll('.tab-nav button')[2])"><span class="nav-icon">🏭</span> Industri</button>
+  <button class="kpi-nav-btn" onclick="showTab('seasonal',document.querySelectorAll('.tab-nav button')[3])"><span class="nav-icon">📅</span> Tren Musiman</button>
+  <button class="kpi-nav-btn" onclick="showTab('yoy',document.querySelectorAll('.tab-nav button')[4])"><span class="nav-icon">🔁</span> YoY 2024 vs 2025</button>
+  <button class="kpi-nav-btn" onclick="showTab('recommendations',document.querySelectorAll('.tab-nav button')[5])"><span class="nav-icon">🎯</span> Insights</button>
 </div>
 
 <div class="grid2">
@@ -307,9 +326,9 @@ tr.row-highlight td{background:#dbeafe!important;transition:background .2s}
 
   <div class="card">
     <div class="ch"><h3>🏆 Top 5 Campaigns — Deal Value Tertinggi</h3></div>
-    <div class="cb" style="display:flex;flex-direction:column">
-      <table style="flex-shrink:0">
-        <tr><th>#</th><th>Campaign</th><th>Leads</th><th>Investment (Rp Juta)</th><th>Deal/Win (Rp Miliar)</th><th>ROI</th></tr>
+    <div class="cb scroll-x" style="display:flex;flex-direction:column">
+      <table style="flex-shrink:0;min-width:480px">
+        <tr><th>#</th><th>Campaign</th><th>Leads</th><th>Investment (Rp Juta)</th><th>Deal/Win (Rp Miliar)</th><th style="min-width:46px">ROI</th></tr>
         <tr><td style="color:#3b82d4;font-weight:700">1</td><td><span class="campaign-name">CX Day 2024 - Yogyakarta (Sep)</span></td><td>447</td><td>299,28</td><td style="font-weight:800;color:#16a34a">6,67</td><td>22.3x</td></tr>
         <tr><td style="color:#3b82d4;font-weight:700">2</td><td><span class="campaign-name">Tech Day 2025 - Medan (Mei)</span></td><td>411</td><td>252,14</td><td style="font-weight:800;color:#16a34a">6,18</td><td>24.5x</td></tr>
         <tr><td style="color:#3b82d4;font-weight:700">3</td><td><span class="campaign-name">Innovation Summit 2024 - Yogyakarta</span></td><td>228</td><td>300,37</td><td style="font-weight:800;color:#3b82d4">5,27</td><td>17.5x</td></tr>
@@ -528,12 +547,23 @@ tr.row-highlight td{background:#dbeafe!important;transition:background .2s}
 <div id="tab-yoy" class="tab-pane">
 <div class="body">
   <div class="kpi-row">
-    <div class="kpi" style="--c:#3b82d4"><div class="label">Campaigns</div><div class="val">140 → 133</div><div class="sub2">2024 → 2025</div><div class="delta down">▼ 5%</div></div>
-    <div class="kpi" style="--c:#7c5cd8"><div class="label">Total Leads</div><div class="val">85K → 79K</div><div class="sub2">2024 → 2025</div><div class="delta down">▼ 6.6%</div></div>
-    <div class="kpi" style="--c:#0891b2"><div class="label">Investment</div><div class="val">12.23 → 11.79B</div><div class="sub2">IDR</div><div class="delta down">▼ 3.6%</div></div>
-    <div class="kpi" style="--c:#16a34a"><div class="label">Deal/Win</div><div class="val">133 → 133.4B</div><div class="sub2">IDR</div><div class="delta up">▲ +0.3%</div></div>
-    <div class="kpi" style="--c:#f59e0b"><div class="label">Overall ROI</div><div class="val">10.88 → 11.31x</div><div class="sub2">Deal/Invest</div><div class="delta up">▲ +3.9%</div></div>
-    <div class="kpi" style="--c:#e11d48"><div class="label">Opportunity</div><div class="val">579 → 578.7B</div><div class="sub2">Pipeline IDR</div><div class="delta flat">≈ Flat</div></div>
+    <div class="kpi" style="--c:#3b82d4"><span class="kpi-icon">📁</span><div class="label">Campaigns</div><div class="val">140 → 133</div><div class="sub2">2024 → 2025</div><div class="delta down">▼ 5%</div></div>
+    <div class="kpi" style="--c:#7c5cd8"><span class="kpi-icon">👥</span><div class="label">Total Leads</div><div class="val">85K → 79K</div><div class="sub2">2024 → 2025</div><div class="delta down">▼ 6.6%</div></div>
+    <div class="kpi" style="--c:#0891b2"><span class="kpi-icon">💰</span><div class="label">Investment</div><div class="val">12.23 → 11.79B</div><div class="sub2">IDR</div><div class="delta down">▼ 3.6%</div></div>
+    <div class="kpi" style="--c:#16a34a"><span class="kpi-icon">🏆</span><div class="label">Deal/Win</div><div class="val">133 → 133.4B</div><div class="sub2">IDR</div><div class="delta up">▲ +0.3%</div></div>
+    <div class="kpi" style="--c:#f59e0b"><span class="kpi-icon">📈</span><div class="label">Overall ROI</div><div class="val">10.88 → 11.31x</div><div class="sub2">Deal/Invest</div><div class="delta up">▲ +3.9%</div></div>
+    <div class="kpi" style="--c:#e11d48"><span class="kpi-icon">🎯</span><div class="label">Opportunity</div><div class="val">579 → 578.7B</div><div class="sub2">Pipeline IDR</div><div class="delta flat">≈ Flat</div></div>
+  </div>
+
+  <!-- KPI Navigation Bar YoY -->
+  <div class="kpi-nav">
+    <span style="font-size:10px;font-weight:700;color:#57606a;align-self:center;margin-right:4px">Lihat Detail:</span>
+    <button class="kpi-nav-btn" onclick="showTab('overview',document.querySelector('.tab-nav button'))"><span class="nav-icon">📈</span> Overview</button>
+    <button class="kpi-nav-btn" onclick="showTab('roi',document.querySelectorAll('.tab-nav button')[1])"><span class="nav-icon">💡</span> ROI &amp; Efisiensi</button>
+    <button class="kpi-nav-btn" onclick="showTab('industry',document.querySelectorAll('.tab-nav button')[2])"><span class="nav-icon">🏭</span> Industri</button>
+    <button class="kpi-nav-btn" onclick="showTab('seasonal',document.querySelectorAll('.tab-nav button')[3])"><span class="nav-icon">📅</span> Tren Musiman</button>
+    <button class="kpi-nav-btn active" onclick="showTab('yoy',document.querySelectorAll('.tab-nav button')[4])"><span class="nav-icon">🔁</span> YoY 2024 vs 2025</button>
+    <button class="kpi-nav-btn" onclick="showTab('recommendations',document.querySelectorAll('.tab-nav button')[5])"><span class="nav-icon">🎯</span> Insights</button>
   </div>
   <div class="grid2">
     <div class="card">
